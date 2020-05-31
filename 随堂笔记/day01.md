@@ -259,7 +259,7 @@
 
 - `const vm = new Vue()`   在全局变量中 vm 对象就是vue的实例
 - 通过vue的实例，可以去访问数据，可以去修改数据
-- 通过 `vm.$data` 可访问当选项data传入个Vue构造函数的数据，传入的data挂载到$data.
+- 通过 `vm.$data` 可访问当选项data传入给Vue构造函数的数据，传入的data挂载到$data.
 - 使用 `vm.$data.msg = '10086'` 修改msg数据，数据驱动视图的更新。
 - 但是每次 `vm.$data`  才能访问到数据和修改数据，略显的麻烦。
 - vue把`vm.$data`上的每一项数据代理在vm对象上（vue实例上），所以直接通过vm即可访问
@@ -279,6 +279,40 @@ data: {
 		// name字段就不是显性声明
 	}
 }
+```
+
+
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h1>{{msg}}</h1>
+    <i>{{user.name}}</i>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    // 实例化vue
+    const vm = new Vue({
+      el: '#app',
+      // vue选项，data作用是声明响应式数据
+      data: {
+        msg: 'hi vue',
+        user: {
+          // 如果模板需要使用必须显性声明，但是可以不给值
+          name: ''
+        }
+      }
+    })
+  </script>
+</body>
+</html>
 ```
 
 
