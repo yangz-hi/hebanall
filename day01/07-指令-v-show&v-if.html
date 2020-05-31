@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- v-show控制元素（标签）的显示隐藏 -->
+      <!-- 语法：v-show="数据|js表达式" -->
+      <div v-show="isShow">我是v-show</div>
+      <!-- v-if 控制元素（标签）的创建移除  -->
+      <!-- 语法：v-if="数据|js表达式" -->
+      <div v-if="isShow">我是v-if</div>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          isShow: true
+        },
+        methods: {}
+      })
+    </script>
+  </body>
+</html>

@@ -585,6 +585,64 @@ data: {
 
 > 目标：掌握通过数据去控制标签的显示隐藏
 
+作用：控制标签的显示和隐藏(表象)
+
+这个两个指令的区别：
+
+- v-show 是通过控制样式 `display:none`  来实现 (频繁切换的时候建议使用)
+
+![1590910510982](docs/media/1590910510982.png)
+
+![1590910533110](docs/media/1590910533110.png)
+
+- v-if  是通过 创建 和  移除 标签来实现，消耗性能多一些。
+
+![1590910606083](docs/media/1590910606083.png)
+
+
+
+案例代码：
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- v-show控制元素（标签）的显示隐藏 -->
+      <!-- 语法：v-show="数据|js表达式" -->
+      <div v-show="isShow">我是v-show</div>
+      <!-- v-if 控制元素（标签）的创建移除  -->
+      <!-- 语法：v-if="数据|js表达式" -->
+      <div v-if="isShow">我是v-if</div>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          isShow: true
+        },
+        methods: {}
+      })
+    </script>
+  </body>
+</html>
+```
+
+
+
+总结：
+
+- v-show  在频繁切换元素显示隐藏
+- v-if  在一次渲染，次数不多的情况下，切换元素的显示隐藏。
+
+
+
 
 
 ### 13-指令-v-on
