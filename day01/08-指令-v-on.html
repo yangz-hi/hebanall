@@ -16,6 +16,16 @@
       <!-- v-on: 绑定事件略显麻烦，可以简写成@ -->
       <button @click="toggleShow">切换显示隐藏</button>
       <div v-show="isShow">我是一个div</div>
+
+      <!-- 绑定事件函数的括号问题 -->
+      <!-- 情况1：带不带都一样 -->
+      <button @click="fn">按钮</button>
+      <!-- 情况2：需要自己的传参，且把实参放置括号 -->
+      <button @click="fn2(10)">按钮</button>
+      <!-- 情况3：函数中使用事件对象 -->
+      <button @click="fn3">按钮</button>
+      <!-- 又想传入事件对象 而且还有传入其他参数  以下写法可以支持 -->
+      <button @click="fn4($event)">按钮</button> <!-- 固定：$event 代表事件对象 -->
     </div>
     <script src="./vue.js"></script>
     <script>
@@ -25,6 +35,21 @@
           isShow: true
         },
         methods: {
+          fn () {
+            console.log('fn函数执行了')
+          },
+          fn2 (age) {
+            console.log(`小明今年${age}岁了`)
+          },
+          fn3 (e) {
+            // 绑定函数的时候如果不带括号，函数会有一个默认的参数，就是事件对象
+            // e 事件对象
+            console.log(e)
+          },
+          fn4 (e) {
+            console.log(e)
+          },
+
           // 声明一个函数
           toggleShow () {
             this.isShow = !this.isShow
