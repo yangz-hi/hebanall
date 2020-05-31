@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 点击按钮的时候，修改isShow数据的值即可 -->
+      <!-- v-on:事件名称="事件处理函数|js表达式" -->
+      <!-- js表达式 -->
+      <!-- <button v-on:click="isShow=!isShow">切换显示隐藏</button> -->
+      <!-- 绑定函数 -->
+      <!-- <button v-on:click="toggleShow">切换显示隐藏</button> -->
+      <!-- v-on: 绑定事件略显麻烦，可以简写成@ -->
+      <button @click="toggleShow">切换显示隐藏</button>
+      <div v-show="isShow">我是一个div</div>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          isShow: true
+        },
+        methods: {
+          // 声明一个函数
+          toggleShow () {
+            this.isShow = !this.isShow
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
