@@ -530,3 +530,65 @@ data: {
 ###  16-案例
 
 > 目标：串一串今日知识点
+
+
+
+
+
+### vue基础结构代码片段
+
+代码片段：
+
+```json
+{
+	"Print to vue-html": {
+		"scope": "html",
+		"prefix": "hv",
+		"body": [
+			"<!DOCTYPE html>",
+			"<html>",
+			"\t<head>",
+			"\t\t<meta charset=\"UTF-8\" />",
+			"\t\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />",
+			"\t\t<title>$1</title>",
+			"\t</head>",
+			"\t<body>",
+			"\t\t<div id=\"app\">",
+			"\t\t$0",
+			"\t\t</div>",
+			"\t\t<script src=\"./vue.js\"></script>",
+			"\t\t<script>",
+			"\t\t\tconst vm = new Vue({",
+			"\t\t\t\tel: '#app',",
+			"\t\t\t\tdata: {},",
+			"\t\t\t\tmethods: {}",
+			"\t\t\t})",
+			"\t\t</script>",
+			"\t</body>",
+			"</html>"
+		],
+		"description": "生成基于vue的基础结构代码"
+	}
+}
+```
+
+
+
+配置的步骤：
+
+- 打开代码片段的界面
+
+![1590907618749](docs/media/1590907618749.png)
+
+- 新建代码片段
+
+![1590907648830](docs/media/1590907648830.png)
+
+- 输入代码片段文件名称（回车）
+
+![1590907697265](docs/media/1590907697265.png)
+
+- 配置片段内容，把 上面准备的内退替换即可
+  -   "prefix": "hv",  快捷生成方式的前缀字符串
+- 如果要删除，根据路径找到对应的文件删除即可。
+
