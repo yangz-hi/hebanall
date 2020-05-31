@@ -166,7 +166,7 @@
 
 和mvvm联系起来
 
-
+![1590894195211](docs/media/1590894195211.png)
 
 
 
@@ -175,6 +175,73 @@
 ### 06-★选项-el
 
 > 目标：掌握vue选项el的使用，了解使用时注意事项。
+
+作用：为实例化好的vm对象（vue实例）指定它管理的容器（标签）视图。
+
+- 大白话，一个vue实例去管理一个容器。
+
+如何指定(el可以写什么)：
+
+- 选择器  `#app`
+- dom对象  `document.getElementById('app')`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 容器 视图 -->
+  <div id="app">
+    <h1>{{msg}}</h1>
+  </div>
+  <!-- 在来一个容器 -->
+  <div id="app2">
+    <h1>{{msg}}</h1>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    const vm = new Vue({
+      // vue的选项，el选项的作用指定vue实例管理的容器
+      // 选择器
+      // el: '#app',
+      // dom对象
+      el: document.querySelector('#app'),
+
+
+
+      data: {
+        msg: 'hi vue'
+      }
+    })
+
+    // 一个vue实例管理一个视图，在次创建一个即可
+    const vm2 = new Vue({
+      el: '#app2',
+      data: {
+        msg: 'hi vue 2'
+      }
+    })
+
+    // 那么是否可以管理 body html 这样的容器，一个vue实例够用了。
+    // vue不允许去指定 body html 这个样的根标签
+    // Do not mount Vue to <html> or <body> - mount to normal elements instead.
+    new Vue({
+      el: 'body'
+    })
+  </script>
+</body>
+</html>
+```
+
+注意：el不能使用body和html标签作为视图容器
+
+
+
+总结：el指定vue实例管理哪个容器（视图）
 
 
 
