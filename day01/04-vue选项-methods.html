@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      {{say()}}
+      <hr>
+      {{say2()}}
+      <hr>
+      {{say3()}}
+      <hr>
+      {{say4()}}
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          msg: 'hi vue'
+        },
+        // vue选项，methods定义函数
+        // 在此处定义的函数，可以通过vm调用，vue实例进行调用
+        // 在模板中页可以使用，函数的名称() 会输出函数返回值
+        // 注意：在模板中访问 数据 函数 不需要使用this
+        methods: {
+          // 1. 传统写法
+          say: function () {
+            console.log('say')
+            // 如果函数有返回值，在模板中调用函数，会输出返回值。
+            return 'hi vue'
+          },
+          say2: function () {
+            // 在methods中声明的函数，其中的this就是vm实例
+            // this.say()
+            return 'say2函数' + this.msg
+          },
+          // 2. 箭头函数写法
+          say3: () => {
+            console.log('say3函数执行了')
+            // 注意：如果是箭头函数本身是没有this的，使用外层作用域的this
+            // 此时的外层作用域的this是window而不是vm，不能访问vue实例的数据和函数
+            // 建议：在methods中的函数尽量别写箭头函数，我们会经常访问数据和函数
+            console.log(this.msg)
+          },
+          // 3. 属性简写写法  === say4:function(){}
+          say4 () {
+            return this.msg + 'say4函数'
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
