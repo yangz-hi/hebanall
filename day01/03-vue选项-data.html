@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h1>{{msg}}</h1>
+    <i>{{user.name}}</i>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    // 实例化vue
+    const vm = new Vue({
+      el: '#app',
+      // vue选项，data作用是声明响应式数据
+      data: {
+        msg: 'hi vue',
+        user: {
+          // 如果模板需要使用必须显性声明，但是可以不给值
+          name: ''
+        }
+      }
+    })
+  </script>
+</body>
+</html>
