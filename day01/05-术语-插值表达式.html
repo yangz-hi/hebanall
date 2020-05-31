@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- js表达式 -->
+      {{1+1}}
+      <hr>
+      {{count>=10?'十位数':'个位数'}}
+      <hr>
+      {{count}}
+      <hr>
+      {{say()}}
+      <hr>
+      <!-- 以下是js语句  不支持-->
+      <!-- {{ if () {} }} -->
+      <!-- {{var a = 10}} -->
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          count: 9
+        },
+        methods: {
+          say () {
+            return 100
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

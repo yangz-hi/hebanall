@@ -416,7 +416,76 @@ data: {
 
 > 目标：理解插值表达式作用和使用场景
 
+作用：在模板中输入内容，把数据对应的值插入到模板当中（视图中）
 
+语法：在被vue管理的视图中 `{{ 任何js表达式 }}`
+
+
+
+可以使用任何js表达式
+
+- 运算 `1 + 1`
+- 三元表达式  `10 > 100 ? '1':'2'`
+- 访问数据  `msg`
+- 访问函数  `say()`
+- ....
+
+但是不能使用js语句
+
+- `if else`  分支语句
+- `for()`  循环语句
+- `var a = 10`  声明变量
+
+
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- js表达式 -->
+      {{1+1}}
+      <hr>
+      {{count>=10?'十位数':'个位数'}}
+      <hr>
+      {{count}}
+      <hr>
+      {{say()}}
+      <hr>
+      <!-- 以下是js语句  不支持-->
+      <!-- {{ if () {} }} -->
+      <!-- {{var a = 10}} -->
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          count: 9
+        },
+        methods: {
+          say () {
+            return 100
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
+```
+
+
+
+总结：
+
+- 在模板中的 `{{}}` 就是插值表单式
+- 里面可以写任意js表达式，输出期结果到模板中
+- 模板：el指定的容器，理解成是模板。
 
 
 
