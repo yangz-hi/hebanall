@@ -10,6 +10,27 @@
 
 > 目标：了解vue的基础概念
 
+官网地址： https://cn.vuejs.org/ 
+
+官方解释：渐进式javascript框架
+
+
+
+区别前端技术叫法：
+
+- 库
+  - 提供了可调用的API，自己组织功能代码，调用API实现功能。例如：jquery zepto
+- 插件
+  - 基于js或者基于jquery来实现某一个特定专项的功能。例如：jquery.color.js
+- ui框架
+  - 关注于用户界面功能，有一套自己的样式风格，提供了很多网站开发常用的功能控件（下拉框，对话框，分页...）。例如：bootstrap，layer，layui，easyui... 基于jquery的。
+- js框架
+  - js框架约定好了开发的套路，使用框架提供的**规则**来进行开发。例如：vue react angular
+
+
+
+总结：vue是一个js框架，提供了一套开发规则，按照这个开发规则可提高开发效率。
+
 
 
 
