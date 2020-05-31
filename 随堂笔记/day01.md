@@ -519,6 +519,66 @@ data: {
 
 > 目标：掌握通过数据去控制标签的内容
 
+作用：可以通过数据去控制标签的内容
+
+两个指令可以实现：
+
+- `v-text`
+  - 在使用该指令的标签中更新替换所有标签的内容，格式是文本
+  - innerText  作用相似
+- `v-html`
+  - 在使用该指令的标签中更新替换所有标签的内容，格式是HTML
+  - innerHTML 作用相似
+
+
+
+区别下插值表达式
+
+- 指令会完全更新标签中的所有内容
+- 但是插值表达式可以，局部替换对应的内容
+
+
+
+案例代码：
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <div>内容：{{textStr}}</div>
+      <!-- 语法：v-text="数据名称" -->
+      <div v-text="textStr">内容：</div>
+      <!-- 语法：v-html="数据名称" -->
+      <div v-html="htmlStr"></div>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          textStr: '<b>我是textStr</b>',
+          htmlStr: '<b>我是textStr</b>'
+        },
+        methods: {}
+      })
+    </script>
+  </body>
+</html>
+```
+
+
+
+总结：
+
+- v-text  更新替换标签的文本内容
+- v-html   更新替换标签的html内容
+
 
 
 ###  12-指令-v-show和v-if
