@@ -651,7 +651,7 @@ data: {
 
 作用：v-on在基于vue的程序中绑定事件
 
-语法： `<div v-on:事件名称="事件处理函数|js表达式"></div>`
+语法： `<div v-on:事件名称="事件处理函数|js表达式"></div>`   简写 @
 
 代码：
 
@@ -745,6 +745,57 @@ data: {
 ###  14-指令-v-bind
 
 > 目标：掌握通过数据去控制标签的属性值
+
+作用：动态的去绑定属性的值，说白了--->通过数据去改变属性的值。
+
+语法：`<div v-bind:标签属性名称="数据名称|js表达式"></div>`   简写 `:`
+
+注意：有些属性的值不是简单的字符串，class style 属性以后单独讲解。
+
+
+
+代码：
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- v-bind:标签属性名称="数据名称|js表达式" -->
+      <!-- <div v-bind:title="title">我是一个DIV</div> -->
+      <div :title="title">我是一个DIV</div>
+      <button @click="fn">改title</button>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          title: 'abcd'
+        },
+        methods: {
+          fn () {
+            this.title = '1234'
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
+```
+
+
+
+总结：
+
+- v-bind动态绑定属性的值，可以简写 `:`
+
+
 
 
 

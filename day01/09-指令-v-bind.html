@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- v-bind:标签属性名称="数据名称|js表达式" -->
+      <!-- <div v-bind:title="title">我是一个DIV</div> -->
+      <div :title="title">我是一个DIV</div>
+      <button @click="fn">改title</button>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          title: 'abcd'
+        },
+        methods: {
+          fn () {
+            this.title = '1234'
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
