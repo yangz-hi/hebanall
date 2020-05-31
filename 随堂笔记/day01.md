@@ -803,6 +803,74 @@ data: {
 
 > 目标：掌握通过数据去遍历标签
 
+作用：通过数据动态遍历标签
+
+语法：
+
+- 遍历4次  `<div v-for="i in 4">i是从1开始序号</div>`
+- 数组类型  list = [{},{},...]
+  - `<div v-for="item in list">item就是每次遍历的选项数据</div>`
+  - `<div v-for="(item,i) in list">item就是每次遍历的选项数据，i就是索引</div>`
+- 对象类型  obj = {a:1,b:2}
+  - `<div v-for="(v,k,i) in obj">v属性值，k属性名，i索引</div>`
+
+**规范：**
+
+- 在v-for指令使用的时候，需要带上一个属性 key 且指定唯一的标识
+- 目的：给遍历的每一个元素加上唯一标识，提高操作的性能。
+- 语法：`v-for="" :key="唯一标识"`   建议使用ID，不得已情况下才会使用索引。
+
+代码：
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- v-for="i in 4" -->
+      <!-- 注意：v-for指令vue官方不建议使用v-if指令 -->
+      <div v-for="i in 4" :key="i">第{{i}}个div</div>
+      <hr>
+      <!-- v-for="item in list" -->
+      <div v-for="item in list" :key="item.id">名字：{{item.name}}</div>
+      <hr>
+      <!--  v-for="(item,i) in list" -->
+      <div v-for="(item,i) in list" :key="i">名字：{{item.name}} 索引{{i}}</div>
+      <!--  v-for="(v,k,i) in obj" -->
+      <div v-for="(v,k,i) in obj" :key="k">值：{{v}} 键：{{k}} 索引：{{i}}</div>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          // 数组
+          list: [{id:1,name:'tom',age:10},{id:2,name:'tony',age:12}],
+          // 对象
+          obj: {
+            name: 'tom',
+            age: 10
+          }
+        },
+        methods: {}
+      })
+    </script>
+  </body>
+</html>
+```
+
+
+
+总结：
+
+- 今后的使用 'v-for'  配合 ‘：key’ 来进行遍历 。
+- v-for不能和v-if同时使用。
+
 
 
 ###  16-案例
