@@ -131,6 +131,45 @@
 
 > 目标：体验vue的基础写法，完成一个基于vue的程序
 
+体验的例子代码：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01-vue体验</title>
+</head>
+<body>
+  <!-- 1. 两个标签  h1  input , 有一个字符串数据， 把数据渲染到这两个标签 -->
+  <!-- 2. input输入内容的时候，收集输入的内容，h1标签的内容改成你输入的内容 -->
+  <div id="app">
+    <h1>{{msg}}</h1>
+    <input type="text" v-model="msg">
+  </div>
+  <!-- 引入 -->
+  <script src="./vue.js"></script>
+  <script>
+    // 当你导入vue.js后，全局环境中拥有一个构造函数，Vue
+    const vm = new Vue({
+      // vue的配置对象
+      el: '#app',
+      data: {
+        msg: 'hi vue'
+      }
+    })
+  </script>
+</body>
+</html>
+```
+
+和mvvm联系起来
+
+
+
+
+
 
 
 ### 06-★选项-el
