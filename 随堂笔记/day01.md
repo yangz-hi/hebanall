@@ -104,6 +104,29 @@
 
 
 
+通过script引入
+
+- 本地下载
+  - https://cn.vuejs.org/js/vue.js 下载地址
+  - 放在本地项目，script引入即可
+- cdn的方式
+  - `  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>  `
+
+
+
+通过npm安装
+
+- 下载 `npm i vue`
+- 导入 `const Vue = require('vue')`   `import Vue from 'vue'`
+- 注意 前端开发，在浏览器运行不行。
+- 需要借助一些工具才能支持 以上写法。
+
+
+
+总结：在基础学习阶段，建议大家使用本地下载引入的方式。
+
+
+
 ### 05-体验vue
 
 > 目标：体验vue的基础写法，完成一个基于vue的程序
