@@ -627,6 +627,43 @@ vue的配置选项
 
 ###  09-案例-添加品牌
 
+> 目标：把上面讲的知识运用一下
+
+实现的基本步骤：
+
+- 准备添加品牌的表单结构
+- 收集输入框中的内容作为品牌名称
+- 绑定表单的提交事件
+- 在触发事件的时候进行添加（添加之前校验）
+  - id信息
+  - brandName 品牌名称
+  - createTime 时间
+- 更新新列表（修改数据）
+- 清空输入框
+
+落地代码：
+
+- 表单结构
+
+```html
+    <!-- 表单 -->
+    <form class="form-inline" @submit.prevent="addBrand()">
+      <div class="form-group" style="margin-right: 10px;">
+        <input v-model="brandName" type="text" class="form-control" placeholder="请输入品牌">
+      </div>
+      <!-- submit点击会触发form的默认提交行为，form安装action进行跳转 -->
+      <button type="submit" class="btn btn-primary">添加品牌</button>
+    </form>
+```
+
+- 收集输入品牌名称信息
+
+```html
+<input v-model="brandName" type="text" class="form-control" placeholder="请输入品牌">
+```
+
+
+
 
 
 
