@@ -261,6 +261,46 @@ vue的配置选项
 
 绑定数组：
 
+- 语法：`<div :class="['类名1','类名2']"></div>`
+- 例子：`<div :class="['bg','red']"></div>`
+
+```html
+      <!-- 基本写法 -->
+      <!-- <div :class="['bg','red']">使用数组操作类名</div> -->
+      <button @click="classArray.push('bg')">加bg</button>
+      <button @click="classArray.push('red')">加red</button>
+      <div :class="classArray">使用数组操作类名</div>
+```
+
+```diff
+        data: {
+          // hasBg: false,
+          // hasRed: false
+          classObject: {
+            bg: false,
+            red: false
+          },
++          classArray: []
+        },
+```
+
+
+
+补充：
+
+- 如果既有 `class`  又有 `:class`  是什么效果
+- class是默认类名，：class产生的类名会进行合并。
+
+
+
+总结：
+
+- v-bind绑定class可以使用对象可以使用数组进行操作。
+- `:class="{类名：是否加类名}"`
+- `:class="['类名']"`
+
+
+
 
 
 ### 05-指令-v-bind绑定style

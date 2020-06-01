@@ -23,6 +23,12 @@
       <button @click="classObject.bg=true">加bg</button>
       <button @click="classObject.red=true">加red</button>
       <div :class="classObject">使用对象操作类名</div>
+      <hr>
+      <!-- 基本写法 -->
+      <!-- <div :class="['bg','red']">使用数组操作类名</div> -->
+      <button @click="classArray.push('bg')">加bg</button>
+      <button @click="classArray.push('red')">加red</button>
+      <div class="abc" :class="classArray">使用数组操作类名</div>
     </div>
     <script src="./vue.js"></script>
     <script>
@@ -34,7 +40,8 @@
           classObject: {
             bg: false,
             red: false
-          }
+          },
+          classArray: []
         },
         methods: {}
       })
