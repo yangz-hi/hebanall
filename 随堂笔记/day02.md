@@ -392,6 +392,68 @@ vue的配置选项
 
 ### 06-指令-v-model
 
+> 目标：知道v-model的语法糖原理，知道任意表单元素进行双向数据绑定。
+
+
+
+1、知道v-model的语法糖原理
+
+- 提问：如果不用v-model你是否可以用现有学习的vue知识来实现双向数据绑定？
+- 双向：
+  - 数据到视图（把data中的数据赋值给表单元素） M->V
+  - 视图到数据（当表单元素的内容发生改变的时候，获取改变的值修改data中的数据） V->M
+
+不使用v-model实现双向绑定
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{msg}}</h1>
+      <!-- 不使用v-model -->
+      <!-- 1. data中数据赋值给表单元素  v-bind:value="msg" -->
+      <!-- 2. 当表单元素值改变后，获取其值去修改data中的数据-->
+      <!-- 2.1 使用input事件监听值改变 -->
+      <!-- 2.2 获取值通过dom对象获取value属性值 -->
+      <!-- 2.3 把最新的值去修改data中的数据-->
+      <input type="text" :value="msg" @input="msg=$event.target.value">
+      <!-- 总结：v-model的语法糖原理是 使用:value赋值，使用@input改值 -->
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          msg: 'hi vue'
+        },
+        methods: {
+          // fn (e) {
+          //   // e.target 是事件触发源  当前的input标签
+          //   // e.target.value 就是输入的值
+          //   // console.log(e.target.value)
+          //   this.msg = e.target.value
+          // }
+        }
+      })
+    </script>
+  </body>
+</html>
+```
+
+总结：**v-model的语法糖原理是 使用:value赋值，使用@input改值**
+
+
+
+
+
+2、其他表单元素如何进行绑定
+
 
 
 
