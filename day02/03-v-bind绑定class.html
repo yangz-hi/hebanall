@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <style>
+      .bg{
+        background: pink;
+      }
+      .red {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 基本写法 -->
+      <!-- <div :class="{bg:false,red:false}">使用对象操作类名</div> -->
+      <!-- 通过数据来控制 单独控制-->
+      <!-- <div :class="{bg:hasBg,red:hasRed}">使用对象操作类名</div> -->
+      <!-- 通过数据来控制 完整控制 -->
+      <button @click="classObject.bg=true">加bg</button>
+      <button @click="classObject.red=true">加red</button>
+      <div :class="classObject">使用对象操作类名</div>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          // hasBg: false,
+          // hasRed: false
+          classObject: {
+            bg: false,
+            red: false
+          }
+        },
+        methods: {}
+      })
+    </script>
+  </body>
+</html>

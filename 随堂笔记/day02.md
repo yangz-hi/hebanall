@@ -194,10 +194,6 @@ vue的配置选项
 
 
 
-
-
-
-
 额外知识：
 
 - 概念：事件修饰符
@@ -207,11 +203,63 @@ vue的配置选项
 
 
 
-
-
 ### 04-指令-v-bind绑定class
 
+> 目标：通过数据的方式去操作class中的类名
 
+作用：操作类名
+
+想法：class属性是由多个类组成，使用对象或者数组
+
+
+
+绑定对象：
+
+- 语法：`<div :class="{类名:是否添加该类名,...}"></div>`
+- 例如：`<div :class="{btn:true,red:false}"></div>`
+
+```html
+    <style>
+      .bg{
+        background: pink;
+      }
+      .red {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 基本写法 -->
+      <!-- <div :class="{bg:false,red:false}">使用对象操作类名</div> -->
+      <!-- 通过数据来控制 单独控制-->
+      <!-- <div :class="{bg:hasBg,red:hasRed}">使用对象操作类名</div> -->
+      <!-- 通过数据来控制 完整控制 -->
+      <button @click="classObject.bg=true">加bg</button>
+      <button @click="classObject.red=true">加red</button>
+      <div :class="classObject">使用对象操作类名</div>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          // hasBg: false,
+          // hasRed: false
+          classObject: {
+            bg: false,
+            red: false
+          }
+        },
+        methods: {}
+      })
+    </script>
+  </body>
+```
+
+
+
+绑定数组：
 
 
 
