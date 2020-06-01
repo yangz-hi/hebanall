@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>案例</title>
+  <link rel="stylesheet" href="./bootstrap.min.css">
+</head>
+<body>
+  <div id="app" class="container" style="padding-top: 100px;">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>编号</th>
+          <th>品牌名称</th>
+          <th>创建时间</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- v-for="每个选项变量名称 in  data数据中的数组" -->
+        <tr v-for="brand in brandList" :key="brand.id">
+          <td>{{brand.id}}</td>
+          <td>{{brand.brandName}}</td>
+          <td>{{brand.createTime}}</td>
+          <td>
+            <a href="#">删除</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    // 初始化
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        // 品牌列表数据
+        brandList: [
+          {id:1,brandName:'宝马',createTime:'2020-06-01 12:12:12'},
+          {id:2,brandName:'宝骏',createTime:'2021-06-01 12:12:12'},
+          {id:3,brandName:'保时捷',createTime:'2020-06-01 12:12:12'},
+          {id:4,brandName:'奥迪',createTime:'2025-06-01 12:12:12'}
+        ]
+      }
+    })
+  </script>
+</body>
+</html>
