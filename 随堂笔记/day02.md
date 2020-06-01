@@ -662,7 +662,37 @@ vue的配置选项
 <input v-model="brandName" type="text" class="form-control" placeholder="请输入品牌">
 ```
 
+```diff
+       // 输入的品牌
+        brandName: ''
+```
 
+- 绑定提交事件，进行添加
+
+```html
+<form class="form-inline" @submit.prevent="addBrand()">
+```
+
+```js
+        // 添加品牌
+        addBrand() {
+          // 校验输入的内容
+          if (!this.brandName.trim()) return alert('请输入品牌名称')
+          // 添加逻辑
+          // 生成ID
+          // 1. 如果此时数组有长度，去除最后一条数据的ID累加1即可
+          // 2. 如果此时数组无长度，ID默认为1
+          const id = this.brandList.length ? this.brandList[this.brandList.length - 1].id + 1 : 1
+          this.brandList.push({
+            id,
+            brandName: this.brandName,
+            createTime: new Date()
+          })
+          // 修改了数组，驱动视图更新，列表添加完毕
+          // 清空输入内容
+          this.brandName = ''
+        }
+```
 
 
 
@@ -670,11 +700,113 @@ vue的配置选项
 
 ### 10-案例-梳理其它功能
 
+> 目的：完成这些需求需要学习更多的知识点
 
+![1590997597291](docs/media/1590997597291.png)
+
+需求：
+
+- 日期格式转换（vue过滤器）
+- 输入框自动获取焦点 （vue的自定义指令）
+- 关键字改变，查寻对应的列表 （vue的计算属性）
 
 
 
 ### 11-vue定义过滤器
+
+> 目的：掌握使用过滤器完成常见的数据格式转换
+
+作用：
+
+- 在插值表达式中使用，可以对输出的内容进行格式的转换。
+
+定义：
+
+- 全局定义（在任何vue实例管理的视图中都可使用）
+  - 语法 `Vue.filter('过滤器名称',处理格式函数(val){ //val就行需要转换的值 //对val进行处理  //处理好的数据return出去即可  })`
+- 局部定义（仅仅在当前定义过滤器的vue实例中使用）
+  - 语法 `new Vue({filters:{'过滤器名称':处理格式函数(val){ //val就行需要转换的值 //对val进行处理  //处理好的数据return出去即可  }}})`
+
+使用：
+
+- 模板中进行使用  `{{数据字段|过滤器名称}}`
+
+
+
+代码：
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 输出十位数的编号，不够十位往前补0 -->
+      <h1>{{num|formatNum(20)}}</h1>
+      <h1>{{num|privateFilter}}</h1>
+    </div>
+    <hr>
+    <div id="app2">
+      <h1>{{count|formatNum}}</h1>
+      <!-- <h1>{{count|privateFilter}}</h1> -->
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+
+      // 全局过滤器
+      // 处理函数(默认参数，自己传参) 补齐几位自己决定
+      Vue.filter('formatNum',(val, total) => {
+        // 如果没有传参默认十位
+        total = total || 10
+        // val 使用过滤器的时候 | 前的js表达式的执行结果
+        // | 术语：管道符
+        // 1. 处理格式
+        // 2. 返回结果（在插值表达式中输出）
+        // 字符串的padStart(得到几位字符串,不够位数补齐的字符) 往前补齐
+        // 字符串的padEnd(得到几位字符串,不够位数补齐的字符) 往后补齐
+        return String(val).padStart(total, 0)
+      })  
+
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          num: 101
+        },
+        methods: {},
+        // 局部过滤器
+        filters: {
+          'privateFilter': (val) => {
+            // 逻辑往后补零
+            return String(val).padEnd(10,0)
+          }
+          // Failed to resolve filter: privateFilter
+          // 在其他视图中使用报错
+        }
+      })
+
+      // 其他实例
+      new Vue({
+        el: '#app2',
+        data: {
+          count: 222
+        }
+      })
+    </script>
+  </body>
+</html>
+```
+
+
+
+总结：
+
+- 全局的  `Vue.filter(过滤器名称,处理函数)`
+- 局部的 `new Vue({filters:{过滤器名称:处理函数}})`
+- 参数处理 `num|formatNum(20)`   
 
 
 

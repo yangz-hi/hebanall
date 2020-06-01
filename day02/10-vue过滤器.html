@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 输出十位数的编号，不够十位往前补0 -->
+      <h1>{{num|formatNum(20)}}</h1>
+      <h1>{{num|privateFilter}}</h1>
+    </div>
+    <hr>
+    <div id="app2">
+      <h1>{{count|formatNum}}</h1>
+      <!-- <h1>{{count|privateFilter}}</h1> -->
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+
+      // 全局过滤器
+      // 处理函数(默认参数，自己传参) 补齐几位自己决定
+      Vue.filter('formatNum',(val, total) => {
+        // 如果没有传参默认十位
+        total = total || 10
+        // val 使用过滤器的时候 | 前的js表达式的执行结果
+        // | 术语：管道符
+        // 1. 处理格式
+        // 2. 返回结果（在插值表达式中输出）
+        // 字符串的padStart(得到几位字符串,不够位数补齐的字符) 往前补齐
+        // 字符串的padEnd(得到几位字符串,不够位数补齐的字符) 往后补齐
+        return String(val).padStart(total, 0)
+      })  
+
+
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          num: 101
+        },
+        methods: {},
+        // 局部过滤器
+        filters: {
+          'privateFilter': (val) => {
+            // 逻辑往后补零
+            return String(val).padEnd(10,0)
+          }
+          // Failed to resolve filter: privateFilter
+          // 在其他视图中使用报错
+        }
+      })
+
+      // 其他实例
+      new Vue({
+        el: '#app2',
+        data: {
+          count: 222
+        }
+      })
+    </script>
+  </body>
+</html>
