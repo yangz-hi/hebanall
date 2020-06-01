@@ -157,12 +157,39 @@ vue的配置选项
 
 落地代码：
 
-绑定事件
+- 绑定事件
 
 ```html
           <td>
             <a href="#" @click.prevent="delBrand(brand.id)">删除</a>
           </td>
+```
+
+- 指定函数
+
+```js
+      methods: {
+        // 删除品牌
+        delBrand (id) {
+          // 1. 根据ID找到索引
+          // 完整写法
+          //const index = this.brandList.findIndex(function(item){
+          //  return item.id === id
+          //})
+          const index = this.brandList.findIndex(item=>item.id===id)
+          // 2. 根据索引删除数据
+          this.brandList.splice(index,1)
+        }
+      }
+```
+
+- 处理无数据
+
+```html
+        <!-- 条件渲染使用v-if  显示的条件：数组没有长度 -->
+        <tr v-if="brandList.length===0">
+          <td colspan="4" style="text-align: center;">暂无数据</td>
+        </tr>
 ```
 
 
