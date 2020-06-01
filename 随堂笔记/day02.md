@@ -454,7 +454,69 @@ vue的配置选项
 
 2、其他表单元素如何进行绑定
 
+- 输入框
+- 下拉框
+- 复选框
+- 单选框
+- 文本域
 
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 输入框 -->
+      <input type="text" v-model="str">
+      <hr>
+      <!-- 下拉框 -->
+      <select v-model="subject">
+        <!-- :value目的是让数值解析 number -->
+        <option :value="1">前端</option>
+        <option :value="2">java</option>
+        <option :value="3">UI</option>
+      </select>
+      <hr>
+      <!-- 复选框 -->
+      <!-- 1. 单个复选框  表示布尔类型的值  true 选中 false 不选中 -->
+      <input type="checkbox" v-model="isChecked">
+      <hr>
+      <!-- 2. 多个复选框 -->
+      <input type="checkbox" value="book" v-model="hobby"> 书籍
+      <input type="checkbox" value="ball" v-model="hobby"> 球类
+      <input type="checkbox" value="game" v-model="hobby"> 游戏
+      <hr>
+      <!-- 单选框 -->
+      <input type="radio" value="男" v-model="gender"> 男
+      <input type="radio" value="女" v-model="gender"> 女
+      <!-- 文本域 -->
+      <hr>
+      <textarea v-model="text"></textarea>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          str: '输入框',
+          subject: '',
+          isChecked: false,
+          hobby: [],
+          gender: '男',
+          text: '文本域'
+        },
+        methods: {}
+      })
+    </script>
+  </body>
+</html>
+```
+
+注意：多个复选框绑定的值是数组
 
 
 
