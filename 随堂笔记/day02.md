@@ -579,7 +579,49 @@ vue的配置选项
 
 ### 08-指令-v-once
 
+> 目标：能够让模板某块区域只渲染一次，当数据发生变化的时候。
 
+认知：
+
+- 在模板中使用一个数据，如果有多处使用这个数据，当数据发生变化的时候，所有使用数据的位置都会更新。
+
+- 可以让某一次内容只渲染一次
+
+场景：
+
+- 计数器（每点一次加一），显示初始值。
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <div v-once>初始值：{{count}}</div>
+      <div>累加值：{{count}}</div>
+      <button @click="count++">加一</button>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          count: 100
+        },
+        methods: {}
+      })
+    </script>
+  </body>
+</html>
+```
+
+
+
+总结：v-once让某一处只渲染一次，不受数据改变的影响。
 
 
 
