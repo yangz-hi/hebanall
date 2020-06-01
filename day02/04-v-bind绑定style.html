@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 基本写法 -->
+      <!-- <div :style="{color:'red',fontSize:'20px'}">使用对象绑定style</div> -->
+      <!-- 动态绑定 -->
+      <button @click="objectStyle.color='pink'">加颜色</button>
+      <button @click="objectStyle.fontSize='100px'">加字体大小</button>
+      <div :style="objectStyle">使用对象绑定style</div>
+      <hr>
+      <!-- 基本写法 -->
+      <!-- <div :style="[{color:'blue'},{fontSize:'30px'}]">使用数组绑定style</div> -->
+      <!-- 动态绑定 -->
+      <button @click="arrayStyle.push({color:'blue'})">加颜色</button>
+      <button @click="arrayStyle.push({fontSize:'30px'})">加字体大小</button>
+      <div style="color: green;" :style="arrayStyle">使用数组绑定style</div>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          // 对象style样式
+          objectStyle: {color:'red',fontSize:'20px',backgroundColor:'none'},
+          // 数组style样式
+          arrayStyle: []
+        },
+        methods: {}
+      })
+    </script>
+  </body>
+</html>

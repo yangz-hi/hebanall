@@ -301,9 +301,90 @@ vue的配置选项
 
 
 
-
-
 ### 05-指令-v-bind绑定style
+
+> 目标：通过数据的方式操作行内样式
+
+作用：通过vue的方式动态修改行内样式，也就是style属性。
+
+想法：style属性是由多个css样式组成的，可使用对象，可使用数组。
+
+
+
+使用对象绑定：
+
+- 语法：`<div :style="{color:'red',fontSize:'20px'}" ></div>`
+  - 如果属性中包含 - 符号   
+    - 'font-size'   字符表示
+    - fontSize   遵循驼峰
+
+```html
+    <div id="app">
+      <!-- 基本写法 -->
+      <!-- <div :style="{color:'red',fontSize:'20px'}">使用对象绑定style</div> -->
+      <!-- 动态绑定 -->
+      <button @click="objectStyle.color='pink'">加bg</button>
+      <button @click="objectStyle.fontSize='100px'">加red</button>
+      <div :style="objectStyle">使用对象绑定style</div>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          // 对象style样式
+          objectStyle: {color:'red',fontSize:'20px',backgroundColor:'none'}
+        },
+        methods: {}
+      })
+    </script>
+```
+
+
+
+使用数组绑定：
+
+- 语法：`<div :style="[{color:'red'},{fontSize:'20px'}]" ></div>`
+- 如果属性中包含 - 符号   
+  - 'font-size'   字符表示
+  - fontSize   遵循驼峰
+
+```html
+      <!-- 基本写法 -->
+      <!-- <div :style="[{color:'blue'},{fontSize:'30px'}]">使用数组绑定style</div> -->
+      <!-- 动态绑定 -->
+      <button @click="arrayStyle.push({color:'blue'})">加颜色</button>
+      <button @click="arrayStyle.push({fontSize:'30px'})">加字体大小</button>
+      <div :style="arrayStyle">使用数组绑定style</div>
+```
+
+```diff
+        data: {
+          // 对象style样式
+          objectStyle: {color:'red',fontSize:'20px',backgroundColor:'none'},
+          // 数组style样式
++          arrayStyle: []
+        },
+```
+
+
+
+疑问：
+
+- 标签上同时存在 `style`  `:style`  结果是？
+- 如果有一样的样式，会发生覆盖，不同的就追加。
+
+
+
+总结：写法
+
+- `:style="{csss属性:css属性值,...}"`
+- `:style="[{csss属性:css属性值,...}]"`
+- css属性值最好遵循驼峰命名，或者用引号包起来。
+
+
+
+
 
 
 
