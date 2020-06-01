@@ -24,8 +24,12 @@
           <td>{{brand.brandName}}</td>
           <td>{{brand.createTime}}</td>
           <td>
-            <a href="#">删除</a>
+            <a href="#" @click.prevent="delBrand(brand.id)">删除</a>
           </td>
+        </tr>
+        <!-- 条件渲染使用v-if  显示的条件：数组没有长度 -->
+        <tr v-if="brandList.length===0">
+          <td colspan="4" style="text-align: center;">暂无数据</td>
         </tr>
       </tbody>
     </table>
@@ -43,6 +47,15 @@
           {id:3,brandName:'保时捷',createTime:'2020-06-01 12:12:12'},
           {id:4,brandName:'奥迪',createTime:'2025-06-01 12:12:12'}
         ]
+      },
+      methods: {
+        // 删除品牌
+        delBrand (id) {
+          // 1. 根据ID找到索引
+          const index = this.brandList.findIndex(item=>item.id===id)
+          // 2. 根据索引删除数据
+          this.brandList.splice(index,1)
+        }
       }
     })
   </script>
