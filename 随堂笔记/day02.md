@@ -522,6 +522,57 @@ vue的配置选项
 
 ### 07-指令-v-cloak
 
+> 目标：能够解决模板闪烁问题
+
+问题：模板（视图）中会使用插值表达式，在vue没有解析前`{{}}`，解析后才是正常的内容。
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" v-cloak>
+      <h1>{{msg}}</h1>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      // 思考：先让模板隐藏，当解析完毕后显示
+      // 指令：v-cloak给容器添加，当解析完毕后v-cloak指令被移除。
+
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          msg: '你好'
+        },
+        methods: {}
+      })
+    </script>
+  </body>
+</html>
+```
+
+
+
+总结：
+
+- v-cloak指令在解析后会移除
+- 写一个隐藏样式 
+
+```css
+      [v-cloak] {
+        display: none;
+      }
+```
+
 
 
 
