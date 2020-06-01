@@ -806,13 +806,92 @@ vue的配置选项
 
 - 全局的  `Vue.filter(过滤器名称,处理函数)`
 - 局部的 `new Vue({filters:{过滤器名称:处理函数}})`
-- 参数处理 `num|formatNum(20)`   
+- 如果有参数处理 `num|formatNum(20)`   
+- 处理函数里面一定要return
 
 
 
 
 
 ### 12-vue操作dom
+
+> 目标：知道在vue项目中如何去获取dom操作dom
+
+
+
+举个栗子：你想获取某个容器的宽度。
+
+这个时候：需要获取容器的dom对象，才能拿到宽度。
+
+
+
+vue中获取dom的方式：
+
+- 首先，给你想获取dom的容器上加上一个ref属性
+- 然后，ref有属性值，定义一个字符串作为标识（联想成给了个ID）
+- 最后，在vue实例中有一个属性$refs
+  - $refs它收集了视图中使用ref标识过的所有dom对象
+
+```html
+<div ref="myDiv">dom容器</div>
+```
+
+```js
+// $refs === {myDiv:'dom对象',。。。}
+const dom = this.$refs.myDiv 
+```
+
+- ref属性的值，就是将来拿dom的键
+
+
+
+栗子代码：
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="getWidth()">获取宽度</button>
+      <div ref="container">我是一个容器</div>
+      <!-- 特殊情况 -->
+      <ul>
+        <li ref="lis" v-for="i in 3">我是第{{i}}个LI</li>
+      </ul>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {
+          getWidth () {
+            // console.log(this.$refs)  {container:div对象}
+            console.log('容器宽度：'+ this.$refs.container.offsetWidth)
+            // 通过 this.$refs.lis 获取的是什么？
+            // 获取到的是数组  [dom1,dom2,dom3]
+            // 获取其中某一个 根据索引获取即可
+            console.log(this.$refs.lis)
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
+```
+
+
+
+补充：
+
+- 目前我们没有学习过组件
+- ref给原生的标签添加后，获取的是dom元素 (掌握)
+- ref给vue的组件添加后，获取的是组件实例
 
 
 

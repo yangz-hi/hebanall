@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="getWidth()">获取宽度</button>
+      <div ref="container">我是一个容器</div>
+      <!-- 特殊情况 -->
+      <ul>
+        <li ref="lis" v-for="i in 3">我是第{{i}}个LI</li>
+      </ul>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {
+          getWidth () {
+            // console.log(this.$refs)  {container:div对象}
+            console.log('容器宽度：'+ this.$refs.container.offsetWidth)
+            // 通过 this.$refs.lis 获取的是什么？
+            // 获取到的是数组  [dom1,dom2,dom3]
+            // 获取其中某一个 根据索引获取即可
+            console.log(this.$refs.lis)
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
