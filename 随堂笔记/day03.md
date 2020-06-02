@@ -902,6 +902,85 @@ axios的使用：
 
 具体的语法：
 
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      {{msg}}
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          msg: 'hi vue',
+          // 对象类型
+          user: {
+            name: 'xxx',
+            age: 10
+          }
+        },
+        methods: {},
+        // vue配置选项：watch 使用侦听器
+        watch: {
+          // 监听data当中的msg
+          msg (newVal,oldVal) {
+            console.log('监听到了')
+            console.log(newVal,oldVal)
+          },
+          // 监听深层属性
+          'user.age': function(newVal,oldVal){
+            console.log('age变了')
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
+```
+
+
+
+搜索品牌实现
+
+```html
+    <input v-model="keyword" type="text" class="form-control" placeholder="输入搜索关键字" style="margin-bottom: 15px;width:195px">
+```
+
+```diff
+      data: {
+        // 列表数据
+        brandList: [],
+        // 品牌名称
+        brandName: '',
+        // 关键字
++        keyword: ''
+      },
+```
+
+```js
+      watch: {
+        keyword () {
+          // 监听keyword改变了
+          // 发模糊查询请求
+          axios.get('http://localhost:3000/brands',{
+            params: {
+              name_like: this.keyword
+            }
+          }).then(res=>{
+            // 接收模糊查询的列表
+            this.brandList = res.data
+          })
+        }
+      },
+```
+
 
 
 
