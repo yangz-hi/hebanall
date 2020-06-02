@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>案例</title>
+  <link rel="stylesheet" href="./bootstrap.min.css">
+</head>
+<body>
+  <div id="app" class="container" style="padding-top: 100px;">
+    <input v-model="keyword" v-autofocus type="text" class="form-control" placeholder="输入搜索关键字" style="margin-bottom: 15px;width:195px">
+    <table class="table table-bordered ">
+      <thead>
+        <tr>
+          <th>编号</th>
+          <th>品牌名称</th>
+          <th>创建时间</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- v-for="每个选项变量名称 in  data数据中的数组" -->
+        <tr v-for="brand in newList" :key="brand.id">
+          <td>{{brand.id}}</td>
+          <td>{{brand.brandName}}</td>
+          <td>{{brand.createTime|formatDate}}</td>
+          <td>
+            <a href="#" @click.prevent="delBrand(brand.id)">删除</a>
+          </td>
+        </tr>
+        <!-- 条件渲染使用v-if  显示的条件：数组没有长度 -->
+        <tr v-if="newList.length===0">
+          <td colspan="4" style="text-align: center;">暂无数据</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- 表单 -->
+    <form class="form-inline" @submit.prevent="addBrand()">
+      <div class="form-group" style="margin-right: 10px;">
+        <input v-model="brandName" type="text" class="form-control" placeholder="请输入品牌">
+      </div>
+      <!-- submit点击会触发form的默认提交行为，form安装action进行跳转 -->
+      <button type="submit" class="btn btn-primary">添加品牌</button>
+    </form>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+
+    // 过滤器
+    Vue.filter('formatDate',(val)=>{
+      // val 是使用过滤器的时候，管道符前的js表达式的执行结果
+      // val 可能是字符串 Date对象，转换成date对象
+      const myDate = new Date(val)
+      const y = myDate.getFullYear()
+      const m = String(myDate.getMonth() + 1).padStart(2,0)
+      const d = String(myDate.getDate()).padStart(2,0)
+      const hh = String(myDate.getHours()).padStart(2,0)
+      const mm = String(myDate.getMinutes()).padStart(2,0)
+      const ss = String(myDate.getSeconds()).padStart(2,0)
+      return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+    })
+
+    // 指令
+    Vue.directive('autofocus',{
+      inserted (el) {
+        el.focus()
+      }
+    })
+
+    // 初始化
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        // 品牌列表数据
+        brandList: [
+          { id: 1, brandName: '宝马', createTime: '2020-06-01 12:12:12' },
+          { id: 2, brandName: '宝骏', createTime: '2021-06-01 12:12:12' },
+          { id: 3, brandName: '保时捷', createTime: '2020/06/01 12:12:12' },
+          { id: 4, brandName: '奥迪', createTime: new Date() }
+        ],
+        // 输入的品牌
+        brandName: '',
+        // 关键字
+        keyword: ''
+      },
+      computed: {
+        // 根据 keyword brandList 得到新数组
+        newList () {
+          // // 这里才是vue实例
+          // const _this = this
+          // const list = this.brandList.filter(function(item){
+          //   // 拿出item中的brandName去匹配keyword
+          //   // 如果包含返回 true 反之返回false
+          //   // 该回调函数返回 true 将当前的item追加到新数组
+          //   return item.brandName.includes(_this.keyword)
+          // })
+          // return list
+          // this.keyword 默认是 '' 那么会查询到所有数据
+          return this.brandList.filter(item=>item.brandName.includes(this.keyword))
+        }
+      },
+      methods: {
+        // 删除品牌
+        delBrand(id) {
+          // 1. 根据ID找到索引
+          const index = this.brandList.findIndex(item => item.id === id)
+          // 2. 根据索引删除数据
+          this.brandList.splice(index, 1)
+        },
+        // 添加品牌
+        addBrand() {
+          // 校验输入的内容
+          if (!this.brandName.trim()) return alert('请输入品牌名称')
+          // 添加逻辑
+          // 生成ID
+          // 1. 如果此时数组有长度，去除最后一条数据的ID累加1即可
+          // 2. 如果此时数组无长度，ID默认为1
+          const id = this.brandList.length ? this.brandList[this.brandList.length - 1].id + 1 : 1
+          this.brandList.push({
+            id,
+            brandName: this.brandName,
+            createTime: new Date()
+          })
+          // 修改了数组，驱动视图更新，列表添加完毕
+          // 清空输入内容
+          this.brandName = ''
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
