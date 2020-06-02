@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      {{msg}}
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          msg: 'hi vue',
+          // 对象类型
+          user: {
+            name: 'xxx',
+            age: 10
+          }
+        },
+        methods: {},
+        // vue配置选项：watch 使用侦听器
+        watch: {
+          // 监听data当中的msg
+          msg (newVal,oldVal) {
+            console.log('监听到了')
+            console.log(newVal,oldVal)
+          },
+          // 监听深层属性
+          'user.age': function(newVal,oldVal){
+            console.log('age变了')
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
