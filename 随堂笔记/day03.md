@@ -694,6 +694,114 @@ axios的使用：
 
 ### 10-接口版案例-列表渲染
 
+实现的大致步骤：
+
+- 准备好静态页面
+- 初始化vue实例
+- 在vue**实例创建**完毕后，发查询所有的请求
+- 如果请求成功，渲染列表
+  - 在data中声明列表数据
+  - 获取后台返回的数据  给data中声明的数据 赋值（数据驱动视图）
+
+落地的代码：
+
+- 准备静态页面
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>案例</title>
+  <link rel="stylesheet" href="./bootstrap.min.css">
+</head>
+<body>
+  <div id="app" class="container" style="padding-top: 100px;">
+    <input type="text" class="form-control" placeholder="输入搜索关键字" style="margin-bottom: 15px;width:195px">
+    <table class="table table-bordered ">
+      <thead>
+        <tr>
+          <th>编号</th>
+          <th>品牌名称</th>
+          <th>创建时间</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>xxx</td>
+          <td>xxx</td>
+          <td><a href="#">删除</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- 表单 -->
+    <form class="form-inline">
+      <div class="form-group" style="margin-right: 10px;">
+        <input type="text" class="form-control" placeholder="请输入品牌">
+      </div>
+      <!-- submit点击会触发form的默认提交行为，form安装action进行跳转 -->
+      <button type="submit" class="btn btn-primary">添加品牌</button>
+    </form>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+
+  </script>
+</body>
+
+</html>
+```
+
+- 初始化vue实例，created中获取数据，修改数据，渲染页面
+
+```html
+  <script src="./axios.min.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        // 列表数据
+        brandList: []
+      },
+      // vue的配置选项：created 它是一个函数，vue实例完毕后执行
+      created () {
+        this.getBrands()
+      },
+      methods: {
+        // 发起获取品牌列表的请求
+        getBrands () {
+          axios.get('http://localhost:3000/brands').then(res=>{
+            // 请求成功 
+            // res.data 得到的请求列表
+            this.brandList = res.data
+          })
+        }
+      }
+    })
+  </script>
+```
+
+```html
+      <tbody>
+        <tr v-for="item in brandList" :key="item.id">
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.ctime}}</td>
+          <td><a href="#">删除</a></td>
+        </tr>
+        <tr v-if="brandList.length===0">
+          <td colspan="4" style="text-align: center;">暂无数据</td>
+        </tr>
+      </tbody>
+```
+
+
+
+总结：created函数在vue实例创建完毕后执行，在此处发请求获取初始化需要的数据。
+
 
 
 ### 11-接口版案例-删除品牌

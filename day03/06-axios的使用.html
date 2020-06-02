@@ -57,12 +57,12 @@
       //   console.log('修改成功')
       // })
 
-      // axios.put('http://localhost:3000/brands/3',{
-      //   name: '奥迪',
-      //   cTime: new Date()
-      // }).then(res=>{
-      //   console.log('修改成功')
-      // })
+      axios.put('http://localhost:3000/brands/3',{
+        name: '奥迪',
+        ctime: new Date()
+      }).then(res=>{
+        console.log('修改成功')
+      })
 
       // - 带查询参数
       // 1. 自己手动在地址栏拼接?后的键值对  ?id=2&name=宝马
@@ -71,15 +71,15 @@
 
 
       // json-server提供模糊查询  字段_like
-      axios.get('http://localhost:3000/brands',{
-        params:{
-          name_like: '奥'
-        }
-      }).then(res=>{
-        console.log(res.data)
-      }).catch(err=>{
-        console.log(err)
-      })
+      // axios.get('http://localhost:3000/brands',{
+      //   params:{
+      //     name_like: '奥'
+      //   }
+      // }).then(res=>{
+      //   console.log(res.data)
+      // }).catch(err=>{
+      //   console.log(err)
+      // })
 
   </script>
 </body>
