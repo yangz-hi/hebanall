@@ -8,7 +8,7 @@
 </head>
 <body>
   <div id="app" class="container" style="padding-top: 100px;">
-    <input type="text" class="form-control" placeholder="输入搜索关键字" style="margin-bottom: 15px;width:195px">
+    <input v-model="keyword" type="text" class="form-control" placeholder="输入搜索关键字" style="margin-bottom: 15px;width:195px">
     <table class="table table-bordered ">
       <thead>
         <tr>
@@ -48,7 +48,23 @@
         // 列表数据
         brandList: [],
         // 品牌名称
-        brandName: ''
+        brandName: '',
+        // 关键字
+        keyword: ''
+      },
+      watch: {
+        keyword () {
+          // 监听keyword改变了
+          // 发模糊查询请求
+          axios.get('http://localhost:3000/brands',{
+            params: {
+              name_like: this.keyword
+            }
+          }).then(res=>{
+            // 接收模糊查询的列表
+            this.brandList = res.data
+          })
+        }
       },
       // vue的配置选项：created 它是一个函数，vue实例完毕后执行
       created () {
