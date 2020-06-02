@@ -31,9 +31,9 @@
       </tbody>
     </table>
     <!-- 表单 -->
-    <form class="form-inline">
+    <form class="form-inline" @submit.prevent="addBrand()">
       <div class="form-group" style="margin-right: 10px;">
-        <input type="text" class="form-control" placeholder="请输入品牌">
+        <input v-model="brandName" type="text" class="form-control" placeholder="请输入品牌">
       </div>
       <!-- submit点击会触发form的默认提交行为，form安装action进行跳转 -->
       <button type="submit" class="btn btn-primary">添加品牌</button>
@@ -46,7 +46,9 @@
       el: '#app',
       data: {
         // 列表数据
-        brandList: []
+        brandList: [],
+        // 品牌名称
+        brandName: ''
       },
       // vue的配置选项：created 它是一个函数，vue实例完毕后执行
       created () {
@@ -68,7 +70,21 @@
               this.getBrands()
             })
           }
-        }
+        },
+        // 添加品牌
+        addBrand () {
+          // 验证
+          if (!this.brandName.trim()) return alert('请输入品牌名称')
+          // 添加请求
+          axios.post('http://localhost:3000/brands',{
+            name: this.brandName,
+            ctime: new Date()
+          }).then(res=>{
+            // 添加成功
+            this.getBrands()
+            this.brandName = ''
+          })
+        } 
       }
     })
   </script>

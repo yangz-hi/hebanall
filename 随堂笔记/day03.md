@@ -835,13 +835,52 @@ axios的使用：
 
 
 
-
-
-
-
-
-
 ### 12-接口版案例-添加品牌
+
+实现的大致步骤：
+
+- 通过数据绑定品牌信息输入框
+- 当你点击添加品牌按钮的时候（b表单提交的时候）
+- 验证品牌是否输入
+- 需要先后台发起添加品牌的请求
+  - 需要提交两个字段：name ctime
+- 添加成功后
+  - 更新当前的列表
+  - 清除输入框内容
+
+落地代码：
+
+```html
+    <!-- 表单 -->
+    <form class="form-inline" @submit.prevent="addBrand()">
+      <div class="form-group" style="margin-right: 10px;">
+        <input v-model="brandName" type="text" class="form-control" placeholder="请输入品牌">
+      </div>
+      <!-- submit点击会触发form的默认提交行为，form安装action进行跳转 -->
+      <button type="submit" class="btn btn-primary">添加品牌</button>
+    </form>
+```
+
+```js
+        // 添加品牌
+        addBrand () {
+          // 验证
+          if (!this.brandName.trim()) return alert('请输入品牌名称')
+          // 添加请求
+          axios.post('http://localhost:3000/brands',{
+            name: this.brandName,
+            ctime: new Date()
+          }).then(res=>{
+            // 添加成功
+            this.getBrands()
+            this.brandName = ''
+          })
+        } 
+```
+
+
+
+
 
 
 
