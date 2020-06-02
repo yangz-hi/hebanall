@@ -252,6 +252,60 @@
 
 ### 05-computed和methods区别
 
+> 目的：指定计算属性和函数的区别，知道计算属性的有优点：缓存
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{reverseFn()}}</h1>
+      <h1>{{reverseFn()}}</h1>
+      <h1>{{reverseFn()}}</h1>
+      <h1>{{reverseMsg}}</h1>
+      <h1>{{reverseMsg}}</h1>
+      <h1>{{reverseMsg}}</h1>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          message: 'hi vue'
+        },
+        methods: {
+          // 反转字符的函数  模板中使用{{reverseFn()}}
+          reverseFn () {
+            console.log('reverseFn')
+            return this.message.split('').reverse().join('')
+          }
+          // 每使用一次，会调用一次函数，重新执行内部逻辑，得到数据
+        },
+        computed: {
+          // 反转字符计算属性 模板中使用{{reverseMsg}}
+          reverseMsg () {
+            console.log('reverseMsg')
+            return this.message.split('').reverse().join('')
+          }
+          // 当多次调用的时候，之后执行一次逻辑，或走缓存
+        }
+      })
+    </script>
+  </body>
+</html>
+```
+
+总结：
+
+- 函数也可以实现数据逻辑处理得到新数据，但是多没使用一次执行一次逻辑，性能不优。
+- 计算属性，在多次使用的时候，会走缓存，性能更好。
+- 将来对数据进行（较为复杂）逻辑处理，建议使用计算属性。
+
 
 
 ### 06-案例-完善功能
