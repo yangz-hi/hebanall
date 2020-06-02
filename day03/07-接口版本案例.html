@@ -23,7 +23,7 @@
           <td>{{item.id}}</td>
           <td>{{item.name}}</td>
           <td>{{item.ctime}}</td>
-          <td><a href="#">删除</a></td>
+          <td><a href="#" @click.prevent="delBrand(item.id)">删除</a></td>
         </tr>
         <tr v-if="brandList.length===0">
           <td colspan="4" style="text-align: center;">暂无数据</td>
@@ -60,6 +60,14 @@
             // res.data 得到的请求列表
             this.brandList = res.data
           })
+        },
+        // 删除品牌
+        delBrand (id) {
+          if (confirm('您确认删除该品牌吗？')) {
+            axios.delete(`http://localhost:3000/brands/${id}`).then(res=>{
+              this.getBrands()
+            })
+          }
         }
       }
     })

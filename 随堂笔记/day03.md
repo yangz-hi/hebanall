@@ -806,6 +806,39 @@ axios的使用：
 
 ### 11-接口版案例-删除品牌
 
+实现的大致步骤：
+
+- 绑定删除按钮的点击事件，阻止默认行为
+- 在指定的事件函数中
+  - 绑定函数的时候传入ID
+  - 弹出一个确认删除的对话框
+  - 点击确认后发删除请求
+- 当删除成功后，需要更新当前列表
+  - 从后台拿到最新的列表数据，重新赋值brandList即可
+
+落地的代码：
+
+```html
+          <td><a href="#" @click.prevent="delBrand(item.id)">删除</a></td>
+```
+
+```js
+        // 删除品牌
+        delBrand (id) {
+          if (confirm('您确认删除该品牌吗？')) {
+            axios.delete(`http://localhost:3000/brands/${id}`).then(res=>{
+              this.getBrands()
+            })
+          }
+        }
+```
+
+
+
+
+
+
+
 
 
 ### 12-接口版案例-添加品牌
