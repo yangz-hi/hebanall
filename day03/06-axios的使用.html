@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script src="./axios.min.js"></script>
+  <script>
+      // - 查询所有
+      // axios.get('http://localhost:3000/brands').then(res=>{
+      //   // res 响应报文对象（响应状态行+响应头+响应主体）
+      //   // res.data 就是响应主体（返回的数据）
+      //   console.log(res.data)
+      // }).catch(err=>{
+      //   // 错误对象
+      //   console.log(err)
+      // })
+
+
+      // - 查询单个
+      // axios.get('http://localhost:3000/brands/2').then(res=>{
+      //   console.log(res.data)
+      // }).catch(err=>{
+      //   console.log(err)
+      // })
+
+
+
+      // - 添加操作
+      // 第二个参数：请求体传参对象
+      // axios.post('http://localhost:3000/brands',{
+      //   name: '奥拓',
+      //   cTime: new Date()
+      // }).then(res=>{
+      //   console.log('添加成功')
+      // })
+
+
+
+      // - 删除操作
+      // axios.delete('http://localhost:3000/brands/4').then(res=>{
+      //   console.log('删除成功')
+      // })
+
+
+
+      // - 修改操作
+      // 第二个参数：请求体传参对象
+      // axios.patch('http://localhost:3000/brands/3',{
+      //   name: '奥拓'
+      // }).then(res=>{
+      //   console.log('修改成功')
+      // })
+
+      // axios.put('http://localhost:3000/brands/3',{
+      //   name: '奥迪',
+      //   cTime: new Date()
+      // }).then(res=>{
+      //   console.log('修改成功')
+      // })
+
+      // - 带查询参数
+      // 1. 自己手动在地址栏拼接?后的键值对  ?id=2&name=宝马
+      // 2. 可以传对象提交多个筛选条件 
+      // 3. get()中第二个参数可以用来提交参数对象  {params:{更多筛选条件}}
+
+
+      // json-server提供模糊查询  字段_like
+      axios.get('http://localhost:3000/brands',{
+        params:{
+          name_like: '奥'
+        }
+      }).then(res=>{
+        console.log(res.data)
+      }).catch(err=>{
+        console.log(err)
+      })
+
+  </script>
+</body>
+
+</html>

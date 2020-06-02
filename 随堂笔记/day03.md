@@ -573,6 +573,41 @@
 
 ### 09-插件-axios
 
+> 目标：通过axios插件调用后台接口
+
+axios是什么：
+
+- 是一个js插件，专注于网络通信（前端的xhr）。
+- 它可以在前端浏览器使用，也可以在后台nodejs环境中使用。
+- 如果在前端使用它是基于：xhr + promise 实现的
+
+axios的下载：
+
+- 文档  https://www.kancloud.cn/yunye/axios/234845 
+- 资源  https://unpkg.com/axios/dist/axios.min.js
+
+axios的使用：
+
+- 查询所有
+
+
+
+- 查询单个
+
+
+
+- 添加操作
+
+
+
+- 删除操作
+
+
+
+- 修改操作
+
+
+
 
 
 ### 10-接口版案例-列表渲染
