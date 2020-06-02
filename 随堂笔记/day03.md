@@ -96,9 +96,157 @@
 
 ### 03-自定义指令
 
+> 目标：vue提供的指令是有限的，实现的功能有限，尝试自己封装指令（自定义指令）
+
+作用：
+
+- 通过vue来封装指令（directive），从而去扩展标签原本的功能。
+
+语法：
+
+- 全局指令
+  - 语法：`Vue.directive(指令名称,指令的配置对象)`
+  - 指令名称：定义的时候不需要`v-`，但是使用的时候加上`v-`
+  - 指令的配置对象：{inserted(el){}}  等使用该指令的元素渲染完毕后（dom生成后）执行
+    - 在dom生成后才可为该dom扩展功能
+    - el 就是使用指令的dom对象
+- 局部指令
+  - 语法：`new Vue({directives:{指令名称:指令的配置对象,...}})`
+  - 指令名称：定义的时候不需要`v-`，但是使用的时候加上`v-`
+  - 指令的配置对象：{inserted(el){}}  等使用该指令的元素渲染完毕后（dom生成后）执行
+    - 在dom生成后才可为该dom扩展功能
+    - el 就是使用指令的dom对象
+
+代码：
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 需求：v-focus指令来为该input标签实现自动获取焦点功能 -->
+      <input type="text" v-focus="{h:100,w:100}">
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      // 全局指令
+      // Vue.directive('focus',{
+      //   // inserted 函数使用该指令的元素渲染完毕后执行
+      //   inserted (el) {
+      //     // el 使用该指令的DOM
+      //     // 获取焦点
+      //     // 对dom扩展任意功能
+      //     el.style.height = '200px'
+      //     el.focus()
+      //   }
+      // })
+
+      const vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {},
+        // 局部 定义自定义指令
+        directives: {
+          // 属性名：指令的名称
+          // 属性值：指令配置对象
+          focus: {
+            inserted (el, binding) {
+              // binding 指令的信息对象
+              // 其中有一个 value 就是指令的值
+              el.style.width = binding.value.w + 'px'
+              el.style.height = binding.value.h + 'px'
+              el.focus()
+            }
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
+```
+
+补充：
+
+- 指令的参数怎么接收 `inserted(el,binding){}`  binding就是指令信息
+
 
 
 ### 04-计算属性
+
+> 目标：掌握通过计算属性来降低模板复杂度，提高模板的清晰度，可读性。
+
+作用：
+
+- 根据data当中的数据，经过一定的逻辑处理，得到一项新数据（计算属性）。
+- 当data中的数据发生变化的时候，计算属性也会更新。
+- 计算属性也是响应式数据，改变的时候也会驱动视图的更新。
+- 当多次获取计算属性的时候，处理逻辑不会重新执行，因为有缓存。
+
+定义：
+
+- 语法：`new Vue({computed:{ 书写计算属性 }})`
+- 书写计算属性：
+  - `myMsg () { // 处理逻辑  return ‘处理后的数据’ }`
+- 使用：和data中的数据一致
+
+代码：
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{message}}</h1>
+      <!-- 逻辑复杂，可读性差，违背初心（使用简单的js表达式） -->
+      <h1>{{ message.split('').reverse().join('') }}</h1>
+      <!-- 通过计算属性来优化 -->
+      <hr>
+      <h1>{{reverseMsg}}</h1>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        // 数据
+        data: {
+          message: 'hi vue'
+        },
+        methods: {},
+        // vue的配置选项：computed
+        // 计算属性
+        computed: {
+          // 属性名 计算属性的名称
+          // 属性值 计算属性的处理函数
+          // reverseMsg : function () {
+          reverseMsg () {
+            // 依赖data中的数据，进行一定的逻辑处理，得到一个新数据
+            const newMsg = this.message.split('').reverse().join('')
+            // 必须将新数据返回出去
+            return newMsg
+          }
+          // reverseMsg 就是数据名称，在模板中使用data中数据一致
+        }
+      })
+    </script>
+  </body>
+</html>
+```
+
+
+
+总结：
+
+- 使用场景：当你依赖data里面的数据，经过较为复杂的逻辑处理，得到一个新的数据，此时可以使用计算属性来实现。
 
 
 

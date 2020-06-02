@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 需求：v-focus指令来为该input标签实现自动获取焦点功能 -->
+      <input type="text" v-focus="{h:100,w:100}">
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      // 全局指令
+      // Vue.directive('focus',{
+      //   // inserted 函数使用该指令的元素渲染完毕后执行
+      //   inserted (el) {
+      //     // el 使用该指令的DOM
+      //     // 获取焦点
+      //     // 对dom扩展任意功能
+      //     el.style.height = '200px'
+      //     el.focus()
+      //   }
+      // })
+
+      const vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {},
+        // 局部 定义自定义指令
+        directives: {
+          // 属性名：指令的名称
+          // 属性值：指令配置对象
+          focus: {
+            inserted (el, binding) {
+              // binding 指令的信息对象
+              // 其中有一个 value 就是指令的值
+              el.style.width = binding.value.w + 'px'
+              el.style.height = binding.value.h + 'px'
+              el.focus()
+            }
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
