@@ -256,9 +256,70 @@
 
 
 
-
-
 ###  05-★组件-局部注册
+
+> 目标：掌握局部组件注册的写法
+
+局部注册的意思：仅仅在注册组件的当前vue实例管理的视图中才可以使用。
+
+具体语法：
+
+- 语法：`new Vue({ components:{组件的名字:组件配置对象} })`
+- 组件配置对象 和  vue实例配置对象  是几乎一样，没有el选项。
+- template选项，声明组件结构的（组件自己的模板）。有且只有一个根标签。
+
+- data选项，必须指定一个函数，函数的返回对象是用来声明数据的。
+
+使用组件：
+
+- 在vue实例管理的视图中#app，把 组件名字 当中一个标签来使用，组件的名字不能用原生的标签来命名。
+- 例如：div span a  article  footer header section ... 原生标签。
+
+演示代码：
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <btn-add></btn-add>
+    </div>
+    <div id="app2">
+      <btn-add></btn-add>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        // 局部注册组件
+        components: {
+          'btn-add': {
+            template: '<div>结果：{{count}} <button @click="add()">累加</button></div>',
+            data () {
+              return {
+                count: 0
+              }
+            },
+            methods: {
+              add () {
+                this.count ++
+              }
+            }
+          }
+        }
+      })
+      const vm2 = new Vue({
+        el: '#app2'
+      })
+    </script>
+  </body>
+</html>
+```
 
 
 
