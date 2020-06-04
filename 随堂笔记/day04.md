@@ -851,3 +851,61 @@ new Vue({
 
 
 
+案例代码：
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <nav>
+        <!-- 第六步  使用router-link来声明连接 -->
+        <router-link to="/">首页</router-link>
+        <router-link to="/my">我的音乐</router-link>
+        <router-link to="/friend">朋友</router-link>
+      </nav>
+      <div id="page">
+        <!-- 第七步  使用router-view指定渲染组件的位置 -->
+        <router-view></router-view>
+      </div>
+    </div>
+    <script src="./vue.js"></script>
+    <!-- 第一步 引入-->
+    <script src="./vue-router.js"></script>
+    <script>
+      // 第二步 组件配置对象
+      const Home = {template:'<b>首页界面</b>'}
+      const My = {template:'<b>我的音乐界面</b>'}
+      const Friend = {template:'<b>朋友界面</b>'}
+      // 第三步  定义路由规则
+      const routes = [
+        {path: '/', component: Home},
+        {path: '/my', component: My},
+        {path: '/friend', component: Friend}
+      ]
+      // 第四步  初始化 vue-router
+      const router = new VueRouter({ routes })
+
+      const vm = new Vue({
+        el: '#app',
+        // 第五步 挂载router到vue根实例下
+        router
+      })
+    </script>
+  </body>
+</html>
+```
+
+
+
+
+
+总额：
+
+- 1.引入2.配置对象3.定义路由规则4.初始化5.挂载根实例6.router-link跳转7.渲染组件位置router-view 
+
