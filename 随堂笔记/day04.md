@@ -466,7 +466,7 @@
 
 - 父组件传值给子组件
 - 子组件传值给父组件
-- 非父子传值
+- 非父子传值 (后面项目中讲解)
 
 
 
@@ -520,11 +520,105 @@
 </html>
 ```
 
+总结：
+
+- 使用子组件的时候写属性  `:message="父组件数据"`
+- 定义子组件的时候写props配置选项  `props:['message']`
+
 
 
 子传父
 
+- 铺垫知识：组件的自定义事件（绑定，触发）
+  - 原生事件    dom元素|标签能支持的事件
+  - 自定义事件   给组件添加的事件，需要通过代码才能触发。
 
+```html
+<!-- 此处的input是com-a组件的自定义事件绑定 -->
+<com-a @input="fn"></com-a>
+```
+
+```js
+// 触发组件的自定义事件  vue实例提供$emit是用来触发自定义事件的函数
+组件实例.$emit('input')
+```
+
+jquery的自定义事件的绑定和触发
+
+![1591251223470](docs/media/1591251223470.png)
+
+![1591251233146](docs/media/1591251233146.png)
+
+- 通过自定义事件的绑定和触发可以实现，子组件传值给父组件。
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title></title>
+</head>
+<body>
+  <div id="app">
+    <com-parent></com-parent>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    Vue.component('com-parent', {
+      template: '<div>我是父组件 {{msg}} <com-child @childToParent="fn($event)" ></com-child></div>',
+      data () {
+        return {
+          msg: ''
+        }
+      },
+      methods: {
+        // fn 是自定义事件的处理函数
+        // 这里会有一个默认的传参 $event 此时：触发自定义事件的传参
+        fn (e) {
+          console.log(e)
+          console.log('自定义事件触发了')
+          this.msg = e
+        }
+      }
+    })
+
+    // 值组件的数据传递给父组件使用
+    Vue.component('com-child', {
+      template: '<div>我是子组件 <button @click="fn2">触发子传父</button></div>',
+      data () {
+        return {
+          msg: '子组件数据com-child'
+        }
+      },
+      methods: {
+        fn2 () {
+          // 点击按钮的时候
+          // 触发自定义事件
+          // 第一个参数：自定义事件的名称
+          // 第二个参数：传递的数据
+          this.$emit('childToParent', this.msg)
+        }
+      }
+    })
+    const vm = new Vue({
+      el: '#app'
+    })
+  </script>
+</body>
+
+</html>
+```
+
+画图分析：
+
+![1591252883603](docs/media/1591252883603.png)
+
+总结：
+
+- 使用子组件的时候，绑定自定义事件
+- 在子组件内部，通过 $emit 触发自定义事件，此时可以传参
+- 当你触发自定义事件的时候，在事件函数中 $event 就是触发自定义事件时候的传参。
 
 
 
