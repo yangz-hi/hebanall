@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <com-parent></com-parent>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+
+      Vue.component('com-parent',{
+        template: '<div>我是父组件 {{msg}}<com-child abc="abc属性值" :message="msg"></com-child></div>',
+        data () {
+          return {
+            msg: '父组件的数据com-parent'
+          }
+        }
+      })
+      // 把父组件的msg数据传递给子组件在来使用
+      Vue.component('com-child',{
+        template: '<div>我是子组件 {{abc}} {{message}} <button @click="update()">改props</button></div>',
+        // 接收使用组件的时候，添加的属性数据
+        // 接收 abc 属性数据，abc可以像data中的数据一样使用
+        // 通过props接收的数据，特点：仅读（只可以访问，不可以修改）
+        // 数据传递值单向的，这种方式是能：父传子
+        props: ['abc','message'],
+        methods: {
+          update () {
+            this.message = 'xxx'
+          }
+        }
+      })
+
+      const vm = new Vue({
+        el: '#app',
+      })
+    </script>
+  </body>
+</html>
