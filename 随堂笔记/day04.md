@@ -667,13 +667,94 @@ jquery的自定义事件的绑定和触发
 - hash地址就是 地址栏中（#+#后的字符串）,就是锚点。hash ---->  哈希
 - hash地址的改变，是会记录到浏览器的历史的，完成业务场景的历史切换（前置或者后退）
 
-总结：（前端路由的实现方式之一）
+总结：（hash是前端路由的实现方式之一）
 
 - 通过hash地址的改变，切换不同的业务场景。
 
 
 
-hash理由原理代码演示：
+hash路由原理代码演示：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 地址  #/  显示  首页界面 -->
+  <!-- 地址  #/my  显示  我的音乐界面 -->
+  <!-- 地址  #/friend  显示  朋友界面 -->
+  <div id="app">
+    <!-- 顶部导航 -->
+    <nav>
+      <a href="#/">首页</a>
+      <a href="#/my">我的音乐</a>
+      <a href="#/friend">朋友</a>
+    </nav>
+    <!-- 显示对应界面 需要根据hash地址的不同来渲染-->
+    <div id="page">
+    </div>
+    <script>
+      // 初始化渲染
+      // 1. 获取hash值
+      // 2. 判断不同的hash值
+      // 3. 页面中插入不同的页面内容
+      function render () {
+        // 获取hash地址，给 location.hash 赋值就是修改hash地址
+        let hash = location.hash
+        // 去除#，更美观更像地址
+        let path = hash.replace('#','')
+        // 判断path渲染不同界面
+        switch (path) {
+          case '/':
+            document.getElementById('page').innerHTML = '<b>首页界面</b>'
+            break;
+          case '/my':
+            document.getElementById('page').innerHTML = '<b>我的音乐界面</b>'
+            break;
+          case '/friend':
+            document.getElementById('page').innerHTML = '<b>朋友界面</b>'
+            break;
+          default:
+            break;
+        }
+      }
+      render()
+      // 切换hash的时候渲染
+      window.onhashchange = function () {
+        // 当hash地址发生改变的时候会执行
+        console.log(location.hash)
+        // 根据当前的hash重新渲染即可
+        render()
+      }
+    </script>
+  </div>
+</body>
+</html>
+```
+
+
+
+扩展知识：（了解）
+
+- 通过H5的api `history.pushState()`
+
+```js
+# 参数1：历史记录的标题
+# 参数2：历史记录的数据
+# 参数3：切换地址
+history.pushState(null,null,'/product')
+```
+
+
+
+总结：
+
+- 前端路由的实现方式，大家需要掌握hash的实现原理。
+- history这种模式需要了解。
 
 
 

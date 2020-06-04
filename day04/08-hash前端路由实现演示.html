@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 地址  #/  显示  首页界面 -->
+  <!-- 地址  #/my  显示  我的音乐界面 -->
+  <!-- 地址  #/friend  显示  朋友界面 -->
+  <div id="app">
+    <!-- 顶部导航 -->
+    <nav>
+      <a href="#/">首页</a>
+      <a href="#/my">我的音乐</a>
+      <a href="#/friend">朋友</a>
+    </nav>
+    <!-- 显示对应界面 需要根据hash地址的不同来渲染-->
+    <div id="page">
+    </div>
+    <script>
+      // 初始化渲染
+      // 1. 获取hash值
+      // 2. 判断不同的hash值
+      // 3. 页面中插入不同的页面内容
+      function render () {
+        // 获取hash地址，给 location.hash 赋值就是修改hash地址
+        let hash = location.hash
+        // 去除#，更美观更像地址
+        let path = hash.replace('#','')
+        // 判断path渲染不同界面
+        switch (path) {
+          case '/':
+            document.getElementById('page').innerHTML = '<b>首页界面</b>'
+            break;
+          case '/my':
+            document.getElementById('page').innerHTML = '<b>我的音乐界面</b>'
+            break;
+          case '/friend':
+            document.getElementById('page').innerHTML = '<b>朋友界面</b>'
+            break;
+          default:
+            break;
+        }
+      }
+      render()
+      // 切换hash的时候渲染
+      window.onhashchange = function () {
+        // 当hash地址发生改变的时候会执行
+        console.log(location.hash)
+        // 根据当前的hash重新渲染即可
+        render()
+      }
+    </script>
+  </div>
+</body>
+</html>
