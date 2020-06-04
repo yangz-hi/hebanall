@@ -740,7 +740,7 @@ hash路由原理代码演示：
 
 扩展知识：（了解）
 
-- 通过H5的api `history.pushState()`
+- 通过H5的api `history.pushState()`  可以改变地址，不发生跳转。也是前端路由的一种实现方式。
 
 ```js
 # 参数1：历史记录的标题
@@ -758,11 +758,96 @@ history.pushState(null,null,'/product')
 
 
 
-
-
-
-
 ###  11-★vue-router-使用步骤
+
+> 目标：使用基于vue的插件vue-router来实现前端路由功能。
+
+vue-router是一个基于vue的插件，实现前端路由功能的，在基于vue的项目当中使用。
+
+文档地址： https://router.vuejs.org/zh/ 
+
+下载地址：https://unpkg.com/vue-router/dist/vue-router.js
+
+
+
+来通过vue-router实现一下上一个章节的路由功能。
+
+使用步骤：
+
+- **引入**，vue.js的下面。
+
+```html
+    <script src="./vue.js"></script>
+    <script src="./vue-router.js"></script>
+```
+
+- vue-router控制的是  （地址------>组件），所以是先**准备组件**。
+  - vue-router实现的是 不同的地址对应不同的组件。
+
+```js
+// 组件配置对象
+const Home = {template:'<b>首页界面</b>'}
+const My = {template:'<b>我的音乐界面</b>'}
+const Friend = {template:'<b>朋友界面</b>'}
+```
+
+- **定义路由规则**（什么地址------>什么组件）
+
+```js
+// routes路由规则配置
+const routes = [
+  // path:路径 component:组件 固定写法
+  {path: '/', component: Home},
+  {path: '/my', component: My},
+  {path: '/friend', component: Friend}
+]
+```
+
+- **初始化vue-router**这个插插件，使用路由规则。
+
+```js
+// 引入插件后 全局变量 VueRouter 构造函数
+// router路由实例
+const router = new VueRouter({
+  // 路由插件配置对象
+  // routes 配置选项作用是：指定路由规则
+  routes
+})
+```
+
+- 把实例好的router对象，**挂载到vue的根实例**（#app的vue实例）中，才能vue+vue-router配合使用。
+
+```js
+// 其实所有的组件都是在#app容器下显示渲染的
+// 所以也可以把#app容器称为根容器，管理这个容器的vue实例，称为：根vue实例
+new Vue({
+  el: '#app',
+  // router 选项：配置路由实例
+  router
+})
+```
+
+- 使用 router-link 来当跳转连接 (默认解析成a标签)
+
+```html
+    <!-- 顶部导航 -->
+    <nav>
+      <router-link to="/">首页</router-link>
+      <router-link to="/my">我的音乐</router-link>
+      <router-link to="/friend">朋友</router-link>
+    </nav>
+```
+
+- 使用 router-view的指定路由对应的组件显示的位置
+
+```html
+    <div id="page">
+      <!-- 显示路由对应的组件 -->
+      <router-view></router-view>
+    </div>
+```
+
+
 
 
 
