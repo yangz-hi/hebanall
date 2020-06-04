@@ -189,7 +189,7 @@
 
 - 组件配置对象 和  vue实例配置对象  是几乎一样，没有el选项。
 
-- template选项，声明组件结构的（组件自己的模板）。有且只有一个根标签。
+- template选项，声明组件结构的（组件自己的模板）。有且只有一个根标签。必须有这个选项
 
 - data选项，必须指定一个函数，函数的返回对象是用来声明数据的。
 
@@ -266,7 +266,7 @@
 
 - 语法：`new Vue({ components:{组件的名字:组件配置对象} })`
 - 组件配置对象 和  vue实例配置对象  是几乎一样，没有el选项。
-- template选项，声明组件结构的（组件自己的模板）。有且只有一个根标签。
+- template选项，声明组件结构的（组件自己的模板）。有且只有一个根标签。必须有这个选项
 
 - data选项，必须指定一个函数，函数的返回对象是用来声明数据的。
 
@@ -326,6 +326,66 @@
 
 
 ###  06-★组件-组件嵌套
+
+> 目标：指定组件时如何嵌套使用
+
+![1591239483136](docs/media/1591239483136.png)
+
+演示代码：
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <!-- <div id="app">
+      <com-parent></com-parent>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      // 嵌套：在父组件中使用子组件
+      Vue.component('com-parent',{
+        template: '<div>我是父组件 <com-child></com-child></div>'
+      })
+      Vue.component('com-child',{
+        template: '<div>我是子组件</div>'
+      })
+      const vm = new Vue({
+        el: '#app',
+      })
+    </script> -->
+    <div id="app">
+      <com-parent></com-parent>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      // 嵌套：在父组件中使用子组件
+      // 局部：局部定义的组件仅仅只能在当前注册的vue实例管理的模板（视图）中使用。
+      const vm = new Vue({
+        el: '#app',
+        components: {
+          'com-parent': {
+            template: '<div>我是父组件 <com-child></com-child></div>',
+            components: {
+              'com-child': {
+                template: '<div>我是子组件</div>'
+              },
+            }
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
+```
+
+
+
+注意：局部定义的组件仅仅只能在当前注册的vue实例管理的模板（视图）中使用。
 
 
 
