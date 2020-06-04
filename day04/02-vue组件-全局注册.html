@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <btn-add></btn-add>
+    </div>
+    <hr>
+    <div id="app2">
+      <btn-add></btn-add>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+
+      // 全局注册
+      Vue.component('btn-add',{
+        // 这是一个字符串，模板字符的原因是：可换html的结构清晰些
+        // 细节：需要有且只有一个根标签
+        template: `<div>
+            结果：{{count}} 
+            <button @click="add()">累加</button>
+          </div>`,
+        // 在组件中data必须是一个函数，返回的对象中来声明数据
+        data () {
+          return {
+            count: 0
+          }
+        },
+        methods: {
+          add () {
+            this.count ++
+          }
+        }
+      })
+
+      const vm = new Vue({
+        el: '#app',
+      })
+      const vm2 = new Vue({
+        el: '#app2',
+      })
+    </script>
+  </body>
+</html>

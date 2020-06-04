@@ -179,6 +179,81 @@
 
 ###  04-★组件-全局注册
 
+> 目标：掌握全局组件注册的写法
+
+全局注册的意思：在任何vue实例下都可以使用。
+
+具体语法：
+
+- 定义 `Vue.component(组件名称,组件配置对象)`
+
+- 组件配置对象 和  vue实例配置对象  是几乎一样，没有el选项。
+
+- template选项，声明组件结构的（组件自己的模板）。有且只有一个根标签。
+
+- data选项，必须指定一个函数，函数的返回对象是用来声明数据的。
+
+使用组件：
+
+- 在vue实例管理的视图中#app，把 组件名字 当中一个标签来使用，组件的名字不能用原生的标签来命名。
+- 例如：div span a  article  footer header section ... 原生标签。
+
+演示代码：
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <btn-add></btn-add>
+    </div>
+    <hr>
+    <div id="app2">
+      <btn-add></btn-add>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+
+      // 全局注册
+      Vue.component('btn-add',{
+        // 这是一个字符串，模板字符的原因是：可换html的结构清晰些
+        // 细节：需要有且只有一个根标签
+        template: `<div>
+            结果：{{count}} 
+            <button @click="add()">累加</button>
+          </div>`,
+        // 在组件中data必须是一个函数，返回的对象中来声明数据
+        data () {
+          return {
+            count: 0
+          }
+        },
+        methods: {
+          add () {
+            this.count ++
+          }
+        }
+      })
+
+      const vm = new Vue({
+        el: '#app',
+      })
+      const vm2 = new Vue({
+        el: '#app2',
+      })
+    </script>
+  </body>
+</html>
+```
+
+
+
+
 
 
 
