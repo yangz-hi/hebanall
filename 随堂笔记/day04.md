@@ -96,7 +96,84 @@
 
 ### 03-★组件-体验
 
+> 目的：体验组件的好处。
 
+- 三个一致的功能，点击一个按钮可以累加10，显示累加的结果。
+
+不使用组件：
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 累加10的功能，三个一样的 -->
+      <div>结果：{{count}} <button @click="add()">累加10</button></div>
+      <div>结果：{{count1}} <button @click="add1()">累加10</button></div>
+      <div>结果：{{count2}} <button @click="add2()">累加10</button></div>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          count: 0,
+          count1: 0,
+          count2: 0
+        },
+        methods: {
+          add () {
+            this.count = this.count + 10
+          },
+          add1 () {
+            this.count1 = this.count1 + 10
+          },
+          add2 () {
+            this.count2 = this.count2 + 10
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
+```
+
+使用组件：
+
+```html
+    <div id="app">
+      <btn-add></btn-add>
+      <btn-add></btn-add>
+      <btn-add></btn-add>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+
+      // 定义组件
+      Vue.component('btn-add',{
+        template: `<div>结果：{{count}} <button @click="add()">累加10</button></div>`,
+        data () {
+          return {
+            count: 0
+          }
+        },
+        methods: {
+          add () {
+            this.count = this.count + 10
+          }
+        }
+      })
+
+      const vm = new Vue({
+        el: '#app'
+      })
+    </script>
+```
 
 
 
