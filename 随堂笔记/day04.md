@@ -393,6 +393,65 @@
 
 ###  07-★组件-命名规则
 
+> 目的：掌握组件名称的规范，为将来项目中使用组件做个铺垫。
+
+有两种规范写法
+
+- 写法一：
+  - 例如 `com-parent`  `btn-add`  `com-child`   
+  - 规则 小写单词加中线分割，多个单词拼接
+  - 使用  按照组件的名称当做标签使用即可。
+- 写法二：
+  - 例如 `ComParent`  `BtnAdd`  `ComChild`
+  - 规则  单词的首字母大写，多个单词拼接
+  - 使用 
+    - 可以转成成  小写单词加中线的写法  当做标签使用即可
+    - 直接用组件的名称 当做标签使用即可
+      - 只能在 template 指定的视图中使用（只能在组件中使用）
+      - 在根vue实例下是不能使用的。
+- 总结：**使用的时候一律使用  小写单词加中线  这种方式，万无一失。**
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <btn-add></btn-add> -->
+      <!-- 以下写法  根容器 #app 容器下不可以使用，它是通过vue实例管理的 -->
+      <!-- <BtnAdd></BtnAdd> -->
+      <my-com></my-com>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+
+      // 写法一 
+      // Vue.component('btn-add',{
+      //   template: '<div>我是一个btn-add组件</div>'
+      // })
+      // 写法二
+      Vue.component('BtnAdd',{
+        template: '<div>我是一个btn-add组件</div>'
+      })
+
+      Vue.component('my-com',{
+        template: '<div>我是一个my-com组件 <BtnAdd></BtnAdd></div>'
+      })
+
+      const vm = new Vue({
+        el: '#app'
+      })
+    </script>
+  </body>
+</html>
+```
+
+
+
 
 
 

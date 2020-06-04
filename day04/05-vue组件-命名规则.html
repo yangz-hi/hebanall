@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <btn-add></btn-add> -->
+      <!-- 以下写法  根容器 #app 容器下不可以使用，它是通过vue实例管理的 -->
+      <!-- <BtnAdd></BtnAdd> -->
+      <my-com></my-com>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+
+      // 写法一 
+      // Vue.component('btn-add',{
+      //   template: '<div>我是一个btn-add组件</div>'
+      // })
+      // 写法二
+      Vue.component('BtnAdd',{
+        template: '<div>我是一个btn-add组件</div>'
+      })
+
+      Vue.component('my-com',{
+        template: '<div>我是一个my-com组件 <BtnAdd></BtnAdd></div>'
+      })
+
+      const vm = new Vue({
+        el: '#app'
+      })
+    </script>
+  </body>
+</html>
