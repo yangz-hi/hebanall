@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title></title>
+</head>
+
+<body>
+  <div id="app">
+    <nav>
+      <router-link to="/">首页</router-link>
+      <router-link to="/my">我的音乐</router-link>
+      <router-link to="/friend">朋友</router-link>
+    </nav>
+    <div id="page">
+      <router-view></router-view>
+    </div>
+  </div>
+  <script src="./vue.js"></script>
+  <script src="./vue-router.js"></script>
+  <script>
+    // 一级路由对应的组件
+    const Home = {
+      template: `<div>
+        <h1>发现音乐界面</h1>
+        <router-link to="/tj">推荐</router-link>
+        <router-link to="/ph">排行榜</router-link>
+        <router-link to="/gd">歌单</router-link>
+        <router-view></router-view>
+      </div>`}
+    const My = { template: '<b>我的音乐界面</b>' }
+    const Friend = { template: '<b>朋友界面</b>' }
+    // 二级路由对应的组件
+    const Tj = { template: '<div>推荐page</div>' }
+    const Ph = { template: '<div>排行榜page</div>' }
+    const Gd = { template: '<div>歌单page</div>' }
+
+    const routes = [
+      {
+        path: '/', component: Home, children: [
+          { path: '/tj', component: Tj },
+          { path: '/ph', component: Ph },
+          { path: '/gd', component: Gd }
+        ]
+      },
+      { path: '/my', component: My },
+      { path: '/friend', component: Friend }
+    ]
+
+    const router = new VueRouter({ routes })
+
+    const vm = new Vue({
+      el: '#app',
+      router
+    })
+  </script>
+</body>
+
+</html>

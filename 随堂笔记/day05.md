@@ -458,6 +458,92 @@ app.get('/login',(req,res)=>{
 
 ### 07-★vue-router-路由嵌套
 
+> 目标：掌握路由嵌套的写法
+
+概念：
+
+- 拥有一级路由，也会有有一级路由对应显示的容器（router-view）
+- 拥有二级路由，也会有有二级路由对应显示的容器（router-view）
+
+场景：
+
+![1591337911760](docs/media/1591337911760.png)
+
+落地代码：
+
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title></title>
+</head>
+
+<body>
+  <div id="app">
+    <nav>
+      <router-link to="/">首页</router-link>
+      <router-link to="/my">我的音乐</router-link>
+      <router-link to="/friend">朋友</router-link>
+    </nav>
+    <div id="page">
+      <router-view></router-view>
+    </div>
+  </div>
+  <script src="./vue.js"></script>
+  <script src="./vue-router.js"></script>
+  <script>
+    // 一级路由对应的组件
+    const Home = {
+      template: `<div>
+        <h1>发现音乐界面</h1>
+        <router-link to="/tj">推荐</router-link>
+        <router-link to="/ph">排行榜</router-link>
+        <router-link to="/gd">歌单</router-link>
+        <router-view></router-view>
+      </div>`}
+    const My = { template: '<b>我的音乐界面</b>' }
+    const Friend = { template: '<b>朋友界面</b>' }
+    // 二级路由对应的组件
+    const Tj = { template: '<div>推荐page</div>' }
+    const Ph = { template: '<div>排行榜page</div>' }
+    const Gd = { template: '<div>歌单page</div>' }
+
+    const routes = [
+      {
+        path: '/', component: Home, children: [
+          { path: '/tj', component: Tj },
+          { path: '/ph', component: Ph },
+          { path: '/gd', component: Gd }
+        ]
+      },
+      { path: '/my', component: My },
+      { path: '/friend', component: Friend }
+    ]
+
+    const router = new VueRouter({ routes })
+
+    const vm = new Vue({
+      el: '#app',
+      router
+    })
+  </script>
+</body>
+
+</html>
+```
+
+
+
+总结：
+
+- router-view路由标签需要有嵌套关系
+- 路由规则也需要嵌套关系，通过规则对象中的 children 属性，来实现嵌套关系配置。
+
+
+
 
 
 ### 08-vue-cli-介绍
