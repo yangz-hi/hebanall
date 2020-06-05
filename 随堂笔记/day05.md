@@ -119,6 +119,90 @@
 
 ### 03-★vue-router-属性to
 
+> 目标：掌握to属性的各种用法
+
+to属性可以写很多中形式的路径。
+
+例如：
+
+- `to="/article"`    静态的to属性
+- `:to="{path:'/article',query:{id:101}}"`  === `to="/article?id=101"`
+- `:to="{name:'article',params:{articleId:101}}"`  === `to="/article/101"`
+  - 路由规则的名称  ` {name:'article', path: '/article/:articleId', component: Article}`
+
+总结：
+
+- 怎么样通过to属性的对象写法，传递键值对参数
+- 怎么样通过to属性的对象写法，传递路径上参数
+
+代码演示：
+
+键值对
+
+```html
+      // 参数方式：键值对  /article?id=101
+      const List = {
+        data () {
+          return {
+            id: 10010
+          }
+        },
+        template: `<div>
+          <h1>列表</h1>
+          <!--<router-link to="/article?id=101">键值对传参</router-link>--> 
+          <!--<router-link :to="'/article?id='+id">键值对传参</router-link>-->
+          <router-link :to="{path:'/article',query:{articleId:id}}">键值对传参</router-link>
+        </div>`
+      }
+      const Item = {
+        // $route  vue实例下的数据，代表路由信息对象，例如传参信息
+        // 获取键值对传参  $route.query
+        template: `<div>
+          <h1>选项 {{$route.query.articleId}}</h1>
+        </div>`
+      }
+
+      const router = new VueRouter({
+        routes: [
+          {path: '/', component: List},
+          {path: '/article', component: Item}
+        ]
+      })
+```
+
+路径上
+
+```html
+// 参数方式：路径上  /article/101
+       const List = {
+        data () {
+          return {
+            id: 10010
+          }
+        },
+        template: `<div>
+          <h1>列表</h1>
+          <!--<router-link to="/article/10010">路径上传参</router-link>-->
+          <!--<router-link :to="'/article/'+id">路径上传参</router-link>-->
+          <router-link :to="{name:'article',params:{id:id}}">路径上传参</router-link>
+        </div>`
+      }
+      const Item = {
+        template: `<div>
+          <h1>选项 {{$route.params.id}}</h1>
+        </div>`
+      }
+
+      const router = new VueRouter({
+        routes: [
+          {path: '/', component: List},
+          {name:'article', path: '/article/:id', component: Item}
+        ]
+      })
+```
+
+
+
 
 
 ### 04-★vue-router-编程式导航
