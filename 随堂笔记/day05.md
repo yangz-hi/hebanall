@@ -425,7 +425,7 @@ app.get('/login',(req,res)=>{
         // 模拟一下当前的登录状态
         const isLogin = false
         // 判断登录的状态
-        //console.log(to)
+        // console.log(to)
         // to 是跳转的目标路由对象  to.path 目标路径
         // console.log(from)
         // from 是来自的目标路由对象  from.path 来自路径
@@ -433,7 +433,7 @@ app.get('/login',(req,res)=>{
         // next() 放行
         // next(路径) 拦截到哪里
         // 如果不是访问登录，且此时没有登录，那么跳转登录页面
-        if (to.path!=='/login' && !isLogin) return next('login')
+        if (to.path!=='/login' && !isLogin) return next('/login')
         // 如果其他情况一律放行
         next()
       })
