@@ -369,11 +369,90 @@ app.get('/login',(req,res)=>{
 </html>
 ```
 
+总结：
 
+- 在vue-router是使用重定向功能 `{ path: '/', redirect: '/home'  },`
 
 
 
 ### 06-★vue-router-导航守卫
+
+> 目标：能掌握路由中导航守卫的用法。
+
+导航守卫概念：
+
+- 在路由跳转的时候，可以介入。在跳转的过程中可以做其他的事情。
+
+画图：
+
+![1591328540880](docs/media/1591328540880.png)
+
+业务需求：
+
+- 后台管理系统的（所有页面），必须要登录后才能访问。
+- 如果没有登录，直接访问后台的页面，拦截到登录页面即可。
+- 如果已经登录，放行即可。
+
+代码演示：
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <router-view></router-view>
+    </div>
+    <script src="./vue.js"></script>
+    <script src="./vue-router.js"></script>
+    <script>
+
+      const router = new VueRouter({
+        routes: [
+          {path: '/login', component: { template: '<div>登录页面</div>' }},
+          {path: '/', component: { template: '<div>管理系统的首页页面</div>' }},
+          {path: '/setting', component: { template: '<div>管理系统的设置页面</div>' }}
+        ]
+      })
+
+      // 使用导航守卫，监听所有的路由跳转
+      router.beforeEach((to,from,next)=>{
+        // 这个回调函数在路由跳转的时候会执行
+        // 模拟一下当前的登录状态
+        const isLogin = false
+        // 判断登录的状态
+        //console.log(to)
+        // to 是跳转的目标路由对象  to.path 目标路径
+        // console.log(from)
+        // from 是来自的目标路由对象  from.path 来自路径
+        // next 是一个下一步执行函数：
+        // next() 放行
+        // next(路径) 拦截到哪里
+        // 如果不是访问登录，且此时没有登录，那么跳转登录页面
+        if (to.path!=='/login' && !isLogin) return next('login')
+        // 如果其他情况一律放行
+        next()
+      })
+
+
+      const vm = new Vue({
+        el: '#app',
+        router
+      })
+    </script>
+  </body>
+</html>
+```
+
+
+
+总结：
+
+- 可以使用导航守卫实现访问权限的控制。
 
 
 
