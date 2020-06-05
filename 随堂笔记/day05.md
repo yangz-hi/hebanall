@@ -132,8 +132,8 @@ to属性可以写很多中形式的路径。
 
 总结：
 
-- 怎么样通过to属性的对象写法，传递键值对参数
-- 怎么样通过to属性的对象写法，传递路径上参数
+- 怎么样通过to属性的对象写法，传递键值对参数   获取 `$route.query`
+- 怎么样通过to属性的对象写法，传递路径上参数   获取 `$route.params`
 
 代码演示：
 
@@ -206,6 +206,100 @@ to属性可以写很多中形式的路径。
 
 
 ### 04-★vue-router-编程式导航
+
+> 目标：掌握不使用router-link进行跳转，通过js的方式进行跳转。
+
+以前：
+
+- 使用 A 标签进行跳转，如果没有 A 标签使用 location.href = '地址'
+
+现在：
+
+- 使用 router-link 进行跳转路由，如果没有 router-link 标签使用  `$router.push('静态地址'|对象)`
+
+概念：
+
+- 使用js的方式进行路由的跳转，就叫：编程式导航
+
+区别 `$route` 和 `$router`  作用：
+
+- `$route`  获取路由信息的（找数据）
+- `$router`  获取路由实例的 ( 调方法 )
+- 以上两个对象均可以通过 VUE实例去访问
+
+
+
+场景：
+
+- 异步的登录成功后，需要从登录跳转到首页。
+- 这个时候就可以使用编程式导航，通过js进行跳转。
+
+
+
+代码：
+
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title></title>
+</head>
+
+<body>
+  <div id="app">
+    <router-view></router-view>
+  </div>
+  <script src="./vue.js"></script>
+  <script src="./vue-router.js"></script>
+  <script>
+
+    // 路由实例对象
+    const router = new VueRouter({
+      // 路由规则
+      routes: [
+        {
+          path: '/login', component: {
+            template: `<div>登录页面  <button @click="login()">登录</button></div>`,
+            methods: {
+              login () {
+                // 进行登录
+                // 登录成功
+                // 跳转首页
+                // $router 是在vue实例上的 路由对象，其中有一个函数push函数可以跳转
+                this.$router.push('/home')
+                // this.$router.push({path:'/home',query:{}})
+                // this.$router.push({name:'home',params:{}})
+                // push当中的对象形式 和to属性中的对象写法规则一致
+              }
+            }
+          }
+        },
+        {
+          path: '/home', name:'home', component: {
+            template: `<div>首页页面  欢迎您！！！</div>`
+          }
+        }
+      ]
+    })
+
+    const vm = new Vue({
+      el: '#app',
+      router
+    })
+  </script>
+</body>
+
+</html>
+```
+
+
+
+总结：
+
+- 如何通过js进行路由跳转 `$router.push()`
 
 
 

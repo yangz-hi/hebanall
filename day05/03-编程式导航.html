@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title></title>
+</head>
+
+<body>
+  <div id="app">
+    <router-view></router-view>
+  </div>
+  <script src="./vue.js"></script>
+  <script src="./vue-router.js"></script>
+  <script>
+
+    // 路由实例对象
+    const router = new VueRouter({
+      // 路由规则
+      routes: [
+        {
+          path: '/login', component: {
+            template: `<div>登录页面  <button @click="login()">登录</button></div>`,
+            methods: {
+              login () {
+                // 进行登录
+                // 登录成功
+                // 跳转首页
+                // $router 是在vue实例上的 路由对象，其中有一个函数push函数可以跳转
+                this.$router.push('/home')
+                // this.$router.push({path:'/home',query:{}})
+                // this.$router.push({name:'home',params:{}})
+                // push当中的对象形式 和to属性中的对象写法规则一致
+              }
+            }
+          }
+        },
+        {
+          path: '/home', name:'home', component: {
+            template: `<div>首页页面  欢迎您！！！</div>`
+          }
+        }
+      ]
+    })
+
+    const vm = new Vue({
+      el: '#app',
+      router
+    })
+  </script>
+</body>
+
+</html>
