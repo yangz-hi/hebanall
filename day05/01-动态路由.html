@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <router-view></router-view>
+    </div>
+    <script src="./vue.js"></script>
+    <script src="./vue-router.js"></script>
+    <script>
+
+      // 文章列表组件配置对象
+      const List = {
+        template:`<div>
+          <h1>文章列表</h1>
+          <router-link to="/article/101">文章1</router-link>  
+          <router-link to="/article/102">文章2</router-link>  
+          <router-link to="/article/103">文章3</router-link>  
+        </div>`
+      }
+      // 文章详情组件配置对象
+      const Article = {
+        // $route 是vue实例上的数据对象,和data中数据的使用时一样的
+        // $route.params 获取路径传参的（动态路由传参的）这是一个对象
+        // $route.params 对象中的数据：键 根据path中的参数名称  值 地址栏上的参数数据了
+        template: `<div><h1>文章详情</h1> {{$route.params.articleId}}</div>`
+      }
+
+      // 路由规则
+      const routes = [
+        {path: '/', component: List},
+        {path: '/article/:articleId', component: Article}
+      ]
+
+      // 初始化
+      const router = new VueRouter({ routes })
+
+      const vm = new Vue({
+        el: '#app',
+        // 挂载
+        router
+      })
+    </script>
+  </body>
+</html>
