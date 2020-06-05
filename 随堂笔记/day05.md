@@ -664,5 +664,60 @@ vue create 项目名称
 
 工作目录
 
+![1591343932829](docs/media/1591343932829.png)
 
+### 12-vue-cli-入口文件
+
+> 目标：代码的含义，知道入口文件的作用。
+
+main.js代码的意思：
+
+```js
+// 项目基于ES6的模块化，也支持commonjs模块化。
+// nodejs支持的是commonjs模块化规范：require(路径|包名) 导入  module.exports 导出
+// ES6的模块化规范：
+// 导入： import 变量名 from '路径|包名'
+// 导出： export default 导出的东西（函数，对象，数据...）
+// 导入vue这个包，接收的变量名称 Vue 及时构造函数
+import Vue from 'vue'
+// 导入APP.vue这个组件，在vue-cli中组件时已*.vue的形式存在，单文件组件
+// App 其实是一个组件配置对象 === {template:'<div>组件结构<div>'}
+import App from './App.vue'
+
+// 是否开启产品级别提示：不开启
+// 产品级别的意思，就是上线以后，线上运行的时候。提示是很简写的。
+// 开发环境，不开启产品级别的提示，提示：需要详细，需要准确。
+Vue.config.productionTip = false
+
+
+// 创建根实例
+// 1. 没有el选项，那如何指定当前实例管理哪个容器呢？
+// vue实例提供一个函数 $mount() 作用是指定管理哪个容器
+// vue实例.$mount('#app') 指定管理app容器
+new Vue({
+  // 2. render是vue的一个配置选项，指定容器渲染声明内容
+  // 在你指定的#app容器里面，渲染App组件的结构。
+  // render: function(createElement){
+  //   // createElement 根据组件配置对象生成html结构
+  //   return createElement(App)
+  // }
+  // el 指定容器，容器里有内容
+  // template 指定容器的内容
+  // render 执行容器渲染那个组件，指定容器的内容
+  // 最终容器里面的内容是 render创建的内容
+  render: h => h(App),
+}).$mount('#app')
+
+```
+
+
+
+入口文件的作用
+
+![1591347351197](docs/media/1591347351197.png)
+
+总结：
+
+- mian.js作用，直接或间接依赖项目开发的所有资源（图片，css，less，js，vue文件）
+- 初始化 根vue实例 
 
