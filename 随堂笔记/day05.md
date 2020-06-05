@@ -572,13 +572,46 @@ vue脚手架：
 - vue-cli在开发阶段给予我们开发时的便利。
 - 让我们专注实现业务，而不是一些项目开发的辅助工作。
 
+- 文档  https://cli.vuejs.org/zh/guide/ 
+
 
 
 ### 09-vue-cli-安装
 
+> 目标：知道如何安装vue-cli即可
+
+安装的命令
+
+```bash
+# 通过npm包管理工具进行全局安装
+npm install -g @vue/cli
+# OR
+# 或者使用 yarn包管理关键进行全局的安装
+yarn global add @vue/cli
+```
+
+安装的问题
+
+- 安装的速度慢：`npm i -g @vue/cli --registry=https://registry.npm.taobao.org`
+- 以前安装过2.0版本的vue-cli工具
+  - 先卸载  `npm un -g vue-cli`
+  - 再安装
+
+检查版本
+
+```bash
+vue --version
+```
+
+
+
+
+
 
 
 ### 10-vue-cli-创建项目
+
+
 
 
 
