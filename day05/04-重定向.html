@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <router-view></router-view>
+    </div>
+    <script src="./vue.js"></script>
+    <script src="./vue-router.js"></script>
+    <script>
+
+      // 路由实例对象
+    const router = new VueRouter({
+      // 路由规则
+      routes: [
+        // 重定向
+        { path: '/', redirect: '/home'  },
+        {
+          path: '/home', name:'home', component: {
+            template: `<div>首页页面  欢迎您！！！</div>`
+          }
+        }
+      ]
+    })
+
+      const vm = new Vue({
+        el: '#app',
+        router
+      })
+    </script>
+  </body>
+</html>

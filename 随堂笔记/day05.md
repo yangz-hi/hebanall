@@ -121,7 +121,7 @@
 
 > 目标：掌握to属性的各种用法
 
-to属性可以写很多中形式的路径。
+to属性可以写很多种形式的路径。
 
 例如：
 
@@ -129,11 +129,6 @@ to属性可以写很多中形式的路径。
 - `:to="{path:'/article',query:{id:101}}"`  === `to="/article?id=101"`
 - `:to="{name:'article',params:{articleId:101}}"`  === `to="/article/101"`
   - 路由规则的名称  ` {name:'article', path: '/article/:articleId', component: Article}`
-
-总结：
-
-- 怎么样通过to属性的对象写法，传递键值对参数   获取 `$route.query`
-- 怎么样通过to属性的对象写法，传递路径上参数   获取 `$route.params`
 
 代码演示：
 
@@ -201,7 +196,10 @@ to属性可以写很多中形式的路径。
       })
 ```
 
+总结：
 
+- 怎么样通过to属性的对象写法，传递键值对参数   获取 `$route.query`
+- 怎么样通过to属性的对象写法，传递路径上参数   获取 `$route.params`
 
 
 
@@ -304,6 +302,74 @@ to属性可以写很多中形式的路径。
 
 
 ### 05-★vue-router-重定向
+
+> 目标：掌握前端路由的重定向功能。
+
+回忆：
+
+- 在nodejs中大家使用的是express框架，其中有 response 对象 ， 函数redirect函数进行重定向。
+
+```JS
+app.get('/login',(req,res)=>{
+  // 返回一个页面
+  // res.send('页面')  res.json()
+  // 重定向函数  跳转到其他页面
+  // res.redirect('/admin')
+})
+```
+
+概念：
+
+- 当你访问的是 a 路径的时候，跳转的却是 b 路径。
+
+业务场景：
+
+- 我们路由默认的地址是 / 路径
+- 但是我的首页 /home 路径
+- 那么在访问 / 路径的时候需要自动跳转到 /home 路径 （需要使用重定向）
+
+代码演示：
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <router-view></router-view>
+    </div>
+    <script src="./vue.js"></script>
+    <script src="./vue-router.js"></script>
+    <script>
+
+      // 路由实例对象
+    const router = new VueRouter({
+      // 路由规则
+      routes: [
+        // 重定向
+        { path: '/', redirect: '/home'  },
+        {
+          path: '/home', name:'home', component: {
+            template: `<div>首页页面  欢迎您！！！</div>`
+          }
+        }
+      ]
+    })
+
+      const vm = new Vue({
+        el: '#app',
+        router
+      })
+    </script>
+  </body>
+</html>
+```
+
+
 
 
 
