@@ -199,11 +199,100 @@ export default {
 
 
 
-
-
 ### 05-hero案例-静态界面
 
+通过bootstrap搭建的，版本是3.3.7
 
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-inverse">
+      <p class="navbar-text">英雄案例</p>
+    </nav>
+    <!-- 内容 -->
+    <div class="row">
+      <div class="col-md-2">
+        <!-- 左菜单 -->
+        <div class="list-group">
+          <a href="#" class="list-group-item active">英雄列表</a>
+          <a href="#" class="list-group-item">装备列表</a>
+          <a href="#" class="list-group-item">技能列表</a>
+        </div>
+      </div>
+      <div class="col-md-10">
+        <!-- 英雄列表 -->
+        <button class="btn btn-primary">添加英雄</button>
+        <hr>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>英雄名称</th>
+              <th>英雄性别</th>
+              <th>创建时间</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1011</td>
+              <td>董存瑞</td>
+              <td>男</td>
+              <td>2010-10-10 10:10:10</td>
+              <td>
+                <button class="btn btn-success">编辑</button>
+                <button class="btn btn-danger">删除</button>
+              </td>
+            </tr>
+            <tr>
+              <td>1011</td>
+              <td>董存瑞</td>
+              <td>男</td>
+              <td>2010-10-10 10:10:10</td>
+              <td>
+                <button class="btn btn-success">编辑</button>
+                <button class="btn btn-danger">删除</button>
+              </td>
+            </tr>
+            <tr>
+              <td>1011</td>
+              <td>董存瑞</td>
+              <td>男</td>
+              <td>2010-10-10 10:10:10</td>
+              <td>
+                <button class="btn btn-success">编辑</button>
+                <button class="btn btn-danger">删除</button>
+              </td>
+            </tr>
+            <tr>
+              <td>1011</td>
+              <td>董存瑞</td>
+              <td>男</td>
+              <td>2010-10-10 10:10:10</td>
+              <td>
+                <button class="btn btn-success">编辑</button>
+                <button class="btn btn-danger">删除</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+```
+
+总结：让大家了解其结构，会拆分成组件。
 
 
 
