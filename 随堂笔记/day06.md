@@ -127,7 +127,55 @@ console.log(str,c)
 
 ### 03-单文件组件
 
+> 目标：能够掌握单文件组件的写法即可
 
+单文件组件，就是以 .vue 后缀的文件，内容是有语法规则的。
+
+可以书写三种个标签：
+
+- template  书写组件模板（视图）写html的，对应template选项
+- script  书写组件逻辑（data，methods，...）
+- style  书写组件样式
+
+下面代码演示：
+
+```html
+<template>
+  <!-- 单文件组件：必须拥有template标签  -->
+  <!-- 书写组件模板的，相当于组件配置选项中的template选项 -->
+  <!-- 组件模板必须有一个根标签 -->
+  <div class="root">
+    {{msg}}
+  </div>
+</template>
+<script>
+// 除去template模板，你还想定义其他选项，在export default {} 书写其他选项。
+export default {
+  data () {
+    return {
+      msg: '信息'
+    }
+  },
+  methods: {},
+  computed: {}
+}
+</script>
+<style scoped>
+  /* 书写样式的地方 */
+  /* 1. style标签  内部的样式默认在所有的组件下户生效 */
+  /* 2. style标签 scoped 作用域  此时样式仅仅只会在当前组件生效  */
+  /* 3. lang="less|scss|stylus" 指定使用什么css预处理器 */
+  /* 现在不能写：通过vue-cli创建项目的时候，没有选择使用何种css预处理器，写上不支持 */
+</style>
+```
+
+
+
+总结：一个单文件组件必须有一个template标签
+
+补充：如果导入了这个单文件组件，其实得到的是和  组件配置对象  一致的东西
+
+- 如果使用需要注册，或者配置在路由是使用。
 
 
 
