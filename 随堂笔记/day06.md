@@ -298,6 +298,23 @@ export default {
 
 ### 06-hero案例-公用组件
 
+创建项目
+
+- 创建命令  vue create hore-project-all
+- 等待下载...
+- 修改目录结构
+  - 删除默认的一些代码
+  - 新建一个 views 放置路由级别组件
+- 在项目的根目录下启动
+- 把项目共享到码云
+  - 地址： https://gitee.com/zhoushugang/hore-project-all 
+  - 没做一个步骤，会提交一次
+  - 希望大家，在我的每次提交记录中，可以找到实现一个功能修改了什么代码。
+
+
+
+公用组件
+
 
 
 
