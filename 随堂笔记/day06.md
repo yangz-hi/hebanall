@@ -183,6 +183,20 @@ export default {
 
  ![img](https://gitee.com/zhoushugang/hm-vue-base-96/raw/master/%E9%9A%8F%E5%A0%82%E7%AC%94%E8%AE%B0/docs/media/1587095356562.png) 
 
+使用vue-cli来实现英雄案例：
+
+- 英雄列表
+  - **列表组件**
+  - **删除功能**
+  - **添加组件**
+  - **编辑组件**
+- 装备列表
+- 技能列表
+
+注意：三个菜单的切换效果需要实现的。
+
+
+
 
 
 
