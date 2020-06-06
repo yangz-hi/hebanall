@@ -556,8 +556,7 @@ new Vue({
 
 文档： 
 
-- https://router.vuejs.org/zh/api/#exact-active-class 
--  https://router.vuejs.org/zh/api/#active-class 
+- https://router.vuejs.org/zh/api/
 
 得到：
 
@@ -567,22 +566,74 @@ new Vue({
 思路：
 
 - 把vue-router默认添加的类名，改成bootstrap支持active类名即可。
-- linkActiveClass  linkExactActiveClass  在 new VueRouter({}) 使用的配置
+- linkActiveClass 模糊  linkExactActiveClass 精确  在 new VueRouter({}) 使用的配置
 
 代码：`main.js`
 
 ```js
 // 初始化路由
+// linkExactActiveClass: 'active' 
+// 把vue-router默认添加的类名，改成bootstrap支持active类名
 const router = new VueRouter({ routes, linkExactActiveClass: 'active' })
 ```
 
 
 
-
-
-
-
 ###  09-hero案例-提取路由模块
+
+问题：
+
+- main.js的职责是，直接或间接依赖项目需要的资源，创建VUE根实例。
+- 现在在main.js中配置了vue-router的相关代码
+- 如果又有很多插件需要配置，而且都在main.js进行配置，代码很难维护
+
+解决：
+
+- 提取路由模块，放到   `src/router.js`  模块中进行配置。
+
+代码： `src/router.js` 
+
+```js
+// 这个模块的职责是配置路由
+
+// 导入包
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+
+// 导入组件
+import HoreList from './views/HoreList.vue'
+import ZbList from './views/ZbList.vue'
+import JnList from './views/JnList.vue'
+
+// 使用插件
+Vue.use(VueRouter)
+
+// 配置路由规则
+const routes = [
+  // 让首页默认跳转英雄列表
+  { path: '/', redirect: '/hore' },
+  { path: '/hore', component: HoreList },
+  { path: '/zb', component: ZbList },
+  { path: '/jn', component: JnList },
+]
+
+// 实例化
+const router = new VueRouter({ routes, linkExactActiveClass: 'active' })
+
+
+// router需要在vue根实例下挂载
+// 1. 导出 router 实例
+// 2. 在main.js导入router实例，进行挂载即可
+export default router
+```
+
+`main.js` 需要导入
+
+```diff
+// 导入自己初始化的router实例
+import router from './router'
+```
 
 
 
