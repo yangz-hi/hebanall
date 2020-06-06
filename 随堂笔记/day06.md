@@ -515,6 +515,69 @@ new Vue({
 
 ### 08-hero案例-路由激活样式
 
+- 路由激活样式
+
+需要根据当前的路由地址，去激活导航菜单的选中样式
+
+
+
+第一种实现方式：
+
+发现，激活导航菜单的类是bootstrap提供的active类名
+
+发现，当访问的地址和导航菜单to属性的地址相同的时候，vue-router会自动加上两个类：
+
+-  router-link-exact-active   精确    地址 /hore  to="/hore"
+  - 当你地址栏的路由路径，和导航菜单上的to属性路径，完全一致的时候会加上。
+-  router-link-active  模糊  地址 /hore/list to="/hore"
+  - 当你地址栏的路由路径，以导航菜单上的to属性路径开头，就会加上这个类名。
+
+思路：把active去掉，把active中的样写在上面两个类名中的任何一个下即可。
+
+代码： `src/components/MyAside.vue`
+
+```html
+<style>
+/* 激活样式 */
+.list-group-item.router-link-exact-active, 
+.list-group-item.router-link-exact-active:hover, 
+.list-group-item.router-link-exact-active:focus {
+    z-index: 2;
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+</style>
+```
+
+
+
+第二种实现方式：
+
+文档： 
+
+- https://router.vuejs.org/zh/api/#exact-active-class 
+-  https://router.vuejs.org/zh/api/#active-class 
+
+得到：
+
+- exact-active-class  可以配置  精确的类名   router-link上的属性
+- active-class  可以配置  模糊的类型  router-link上的属性
+
+思路：
+
+- 把vue-router默认添加的类名，改成bootstrap支持active类名即可。
+- linkActiveClass  linkExactActiveClass  在 new VueRouter({}) 使用的配置
+
+代码：`main.js`
+
+```js
+// 初始化路由
+const router = new VueRouter({ routes, linkExactActiveClass: 'active' })
+```
+
+
+
 
 
 
