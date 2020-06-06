@@ -308,14 +308,102 @@ export default {
 - 在项目的根目录下启动
 - 把项目共享到码云
   - 地址： https://gitee.com/zhoushugang/hore-project-all 
-  - 没做一个步骤，会提交一次
+  - 每做一个步骤，会提交一次
   - 希望大家，在我的每次提交记录中，可以找到实现一个功能修改了什么代码。
 
 
 
 公用组件
 
+- 引入bootstrap样式
 
+```bash
+# 项目根目录下执行安装
+npm i bootstrap@3.3.7
+```
+
+`main.js`  导入
+
+```js
+import 'bootstrap/找到包中的css文件'
+```
+
+- 分析布局结构
+
+![1591414602675](docs/media/1591414602675.png)
+
+- 需要定义两个公用的组件 NavBar  MyAside
+
+`src/components/NavBar.vue`
+
+```html
+<template>
+  <nav class="navbar navbar-inverse">
+    <p class="navbar-text">英雄案例</p>
+  </nav>
+</template>
+```
+
+`src/components/MyAside.vue`
+
+```html
+<template>
+  <div class="list-group">
+    <a href="#" class="list-group-item active">英雄列表</a>
+    <a href="#" class="list-group-item">装备列表</a>
+    <a href="#" class="list-group-item">技能列表</a>
+  </div>
+</template>
+```
+
+`App.vue` 使用组件
+
+导入组件
+
+```js
+// NavBar 相对于组件配置对象 {template:'<div>内容</div>'}
+import NavBar from "./components/NavBar.vue"
+// MyAside 相对于组件配置对象 {template:'<div>内容</div>'}
+import MyAside from "./components/MyAside.vue"
+```
+
+注册组件
+
+```diff
+export default {
+  // 组件的配置选项，代表组件名字的标识。
+  name: "App",
+  // 注册组件
++  components: { NavBar, MyAside}
+};
+```
+
+使用组件
+
+```html
+<template>
+  <div id="app" class="container">
+    <!-- 导航组件 -->
+    <nav-bar></nav-bar>
+    <!-- 内容 -->
+    <div class="row">
+      <div class="col-md-2">
+        <!-- 侧边栏组件 -->
+        <my-aside></my-aside>
+      </div>
+      <div class="col-md-10">
+        <!-- 路由组件router-view -->
+      </div>
+    </div>
+  </div>
+</template>
+```
+
+
+
+总结：
+
+- 提取组件，为了可维护性。
 
 
 
