@@ -775,11 +775,37 @@ import moment from 'moment'
 
 
 
-
-
 ### 12-hero案例-删除功能
 
+实现的大致步骤：
 
+- 绑定删除按钮的点击事件
+- 点击的时候弹出确认框
+- 点击确认的时候发生删除请求
+- 删除成功后更新当前列表
+
+落地代码：
+
+- 绑定事件
+
+```html
+<button @click="delHore(item.id)" class="btn btn-danger">删除</button>
+```
+
+- 处理函数
+
+```js
+    // 删除函数
+    delHore (id) {
+      if (confirm('老铁，您是否删除该英雄？')) {
+        // 删除请求
+        axios.delete(`http://localhost:3000/hore/${id}`).then(()=>{
+          // 删除成功后更新列表
+          this.getHoreList()
+        })
+      }
+    }
+```
 
 
 
