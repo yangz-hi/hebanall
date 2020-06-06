@@ -732,16 +732,58 @@ export default {
 
 
 
-
-
-
-
-
-
 ### 11-hero案例-时间过滤
+
+实现的大致步骤：
+
+- 定义过滤器
+- 使用moment做日期转换
+  - 安装 npm i moment
+  - 导入使用  moment(日期对象).format('YYYY-MM-DD HH:mm:ss')
+- 在模板中使用即可
+
+落地代码：`src/views/HoreList.vue`
+
+安装moment
+
+```bash
+npm i moment
+```
+
+定义过滤器
+
+```js
+// 导入moment
+import moment from 'moment'
+```
+
+```js
+  // 过滤器
+  filters: {
+    formatTime (time) {
+      // time 使用该过滤器的管道符前js表达式执行的结果
+      return moment(new Date(time)).format('YYYY-MM-DD HH:mm:ss')
+    }
+  },
+```
+
+使用过滤器
+
+```html
+<td>{{item.time|formatTime}}</td>
+```
 
 
 
 
 
 ### 12-hero案例-删除功能
+
+
+
+
+
+### 13-忽略代码风格检查
+
+
+
