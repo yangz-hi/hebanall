@@ -51,6 +51,76 @@ main.js称为：**入口文件**
 
 ### 02-ES6模块化
 
+> 目标：掌握ES6模块化开发的，导入和导出。
+
+前置提醒：ES6 commonJS 模块化的实现不能再前端浏览器中使用，浏览器不支持。
+
+在vue-cli中，会把ES6的模块化实现，通过vue-cli实现成浏览器能够支持的模块化代码。
+
+
+
+第一种写法：默认导出和默认导入
+
+```js
+// 使用默认导出
+// 只能默认导出一次
+// 可以导出任何东西
+const str = '默认导出的数据'
+export default str
+```
+
+```js
+// ES6默认导入
+// import 变量名称(接收默认导出的内容)  from  '路径|包名称'
+import myStr from './myModule'
+console.log(myStr)
+```
+
+第二种写法：指定成员导出和指定成员导入（按需导出和按需导入）
+
+```js
+// a 属于模块内部变量
+const a = 10
+// 按需导出 b 成员
+export const b = 20
+// 按需导出 c 成员
+export const c = a + b 
+```
+
+```js
+// ES6按需导入写法
+// 1. 如果接收所有的按需导出的成员
+// import * as all from './myModule'
+// console.log(all) === {b:20,c:30}
+// 2. 只想接收其中某一个成员
+// 强调：这里不是解构赋值，这是模块化的语法
+import { b } from './myModule'
+import { b as otherB } from './myModule'
+console.log(b)
+console.log(otherB)
+// as 是取别名的意思
+```
+
+混合写法
+
+```js
+// a 属于模块内部变量
+const a = 10
+// 按需导出 b 成员
+export const b = 20
+// 按需导出 c 成员
+export const c = a + b 
+
+export default '默认的'
+```
+
+```js
+// 混合写法
+// 得到默认成员 得c成员  
+import str, { c } from './myModule'
+console.log(str,c)
+```
+
 
 
 
