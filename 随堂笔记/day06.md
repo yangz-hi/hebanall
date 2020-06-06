@@ -332,7 +332,7 @@ import 'bootstrap/找到包中的css文件'
 
 ![1591414602675](docs/media/1591414602675.png)
 
-- 需要定义两个公用的组件 NavBar  MyAside
+- 需要定义两个公用的组件 NavBar  MyAside    
 
 `src/components/NavBar.vue`
 
@@ -409,7 +409,107 @@ export default {
 
 ### 07-hero案例-实现路由
 
+实现路由的基本步骤：
 
+- 安装与导入
+
+```bash
+# 在项目根目录下 安装vue-router
+npm i vue-router
+```
+
+```js
+// 在main.js中导入vue-router
+import VueRouter from 'vue-router'
+```
+
+- 如果是**在vue-cli中**，需要有一个使用的动作
+
+```js
+// 在vue中使用这个插件
+Vue.use(VueRouter)
+```
+
+- 准备组件，HoreList.vue  ZbList.vue  JnList.vue  在`scr/views` 下定义
+
+```html
+<template>
+  <div>英雄组件</div>
+</template>
+```
+
+```html
+<template>
+  <div>装备组件</div>
+</template>
+```
+
+```html
+<template>
+  <div>技能组件</div>
+</template>
+```
+
+- 配置路由规则
+
+```js
+// 导入定义好的路由级别组件
+import HoreList from './views/HoreList.vue'
+import ZbList from './views/ZbList.vue'
+import JnList from './views/JnList.vue'
+// 配置路由规则
+const routes = [
+  // 让首页默认跳转英雄列表
+  { path: '/', redirect: '/hore' },
+  { path: '/hore', component: HoreList },
+  { path: '/zb', component: ZbList },
+  { path: '/jn', component: JnList },
+]
+```
+
+- 初始化路由
+
+```js
+const router = new VueRouter({ routes })
+```
+
+- 挂载到根vue实例
+
+```diff
+new Vue({
+  render: h => h(App),
++  router
+}).$mount('#app')
+```
+
+
+
+进行使用：
+
+`src/components/MyAside.vue `  把a改成router-link组件
+
+```html
+  <div class="list-group">
+    <router-link to="/hore" class="list-group-item active">英雄列表</router-link>
+    <router-link to="/zb" class="list-group-item">装备列表</router-link>
+    <router-link to="/jn" class="list-group-item">技能列表</router-link>
+  </div>
+```
+
+`App.vue` 组件放置 router-view 组件，渲染路由对应的组件
+
+```html
+      <div class="col-md-10">
+        <!-- 路由组件router-view 指定路由对应的组件显示的位置-->
+        <router-view></router-view>
+      </div>
+```
+
+
+
+总结：
+
+- 注意import导入的vue-router需要Vue.use()使用以下。
 
 
 
