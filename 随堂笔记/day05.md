@@ -721,3 +721,34 @@ new Vue({
 - mian.js作用，直接或间接依赖项目开发的所有资源（图片，css，less，js，vue文件）
 - 初始化 根vue实例 
 
+
+
+
+
+
+
+### 今日总结
+
+- 动态路由： `{path:'/article/:id',component: 组件}`
+  - 例如： /article/101  /article/102  。。。 这样的地址都可以匹配。
+- router-link 上有个to属性是，用来配置跳转的地址
+  - query传参   ?id=10&name=tom   `:to="{path:'',query:{id:101,name'tom'}}"`
+  - params传参  article/101/tom  `:to="{name:'路由规则的名字',params:{id:101,name'tom'}}"`
+
+- 编程式导航：`$router.push()`  
+- 重定向：`{path:'/',redirect:'/home'}`    访问 / 指定跳转到  /home
+- 导航守卫： `router.beforeEach((to,from,next)=>{ //可再此处做些什么 })`
+- 路由嵌套：
+  - router-view需要嵌套
+  - 路由规则需要利用 children 属性配置嵌套关系
+- vue-cli
+  - 安装
+  - 创建默认的项目
+  - main.js中代码的含义
+    - ES6模块化
+    - vue组件，单文件组件（明天讲）
+    - 创建vue实例
+  - main.js的职责（作用）
+
+
+
