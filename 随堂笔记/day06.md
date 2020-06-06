@@ -637,9 +637,102 @@ import router from './router'
 
 
 
-
-
 ###  10-hero案例-列表组件
+
+使用json-server创建一套接口支持英雄案例：
+
+- 在db.json中加入
+
+```json
+  "hore": [
+     {"id":1,"horeName":"赵云","gender":"男","time":"2010/09/11 10:09:46" },
+     {"id":2,"horeName":"赵信","gender":"男","time":"2020/09/11 12:09:46" }
+  ]
+```
+
+- 启动接口服务，在db.json目录下，执行 json-server db.json
+
+
+
+实现的大致的步骤：
+
+- 完组件的基础布局
+- 在组件初始化的时候，通过axios获取后台数据。
+  - 安装axios  `npm i axios`
+  - 导入axios
+  - 发列表请求  ` http://localhost:3000/hore `
+- 模板中渲染
+  - 依赖的数据需要在data中先声明    horeList
+  - 只需在获取数据后给horeList赋值即可
+  - 在模板中使用  插值表达式或者指令 进行渲染
+  - 处理无数据的情况
+
+落地代码：`src/views/HoreList.vue`
+
+```html
+<template>
+  <div class="hore-list">
+    <button class="btn btn-primary">添加英雄</button>
+    <hr />
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>英雄名称</th>
+          <th>英雄性别</th>
+          <th>创建时间</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in horeList" :key="item.id">
+          <td>{{item.id}}</td>
+          <td>{{item.horeName}}</td>
+          <td>{{item.gender}}</td>
+          <td>{{item.time}}</td>
+          <td>
+            <button class="btn btn-success" style="margin-right:10px">编辑</button>
+            <button class="btn btn-danger">删除</button>
+          </td>
+        </tr>
+        <tr v-if="horeList.length===0">
+          <td colspan="5" style="text-align:center">暂无数据</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</template>
+<script>
+// 引入axios
+import axios from 'axios'
+export default {
+  // 组件初始化的时候执行
+  created () {
+    // 获取后台数据
+    this.getHoreList()
+  },
+  data () {
+    return {
+      horeList: []
+    }
+  },
+  methods: {
+    getHoreList () {
+      // 1. 发获取英雄列表的请求
+      // 2. 获取数据后给 horeList 赋值即可
+      axios.get('http://localhost:3000/hore').then(res=>{
+        // res.data 就是后台返回的英雄列表数据
+        this.horeList = res.data
+      })
+    }
+  }
+}
+</script>
+```
+
+
+
+
 
 
 
